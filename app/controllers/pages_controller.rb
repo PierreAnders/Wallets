@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: :home
-
   def home
+    require 'net/http'
+    require 'json'
+
+    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur'
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @coins =  JSON.parse(@response)
   end
 end

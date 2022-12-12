@@ -1,2 +1,13 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <p> Market </p>
+  <% @coins.each do |coin| %>
+  <div class="card">
+    <div><%= coin["market_cap_rank"] %></div>
+    <div><%= image_tag coin["image"], class: "logo-crypto" %></div>
+    <div><%= coin["name"] %></div>
+    <div><%= coin["current_price"] %>€</div>
+    <div><%= coin["market_cap"] %>€</div>
+    <div><%= coin["price_change_percentage_24h"] %>%</div>
+  </div>
+  <% end %>
+</div>

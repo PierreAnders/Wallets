@@ -1,0 +1,6 @@
+ <div class="container">
+  <h1>Wallets</h1>
+    <% @wallets.each do |wallet| %>
+      <p> <%= link_to wallet.name, wallet_path(wallet) %> : <%= wallet.category %></p>
+    <% end %>
+</div>
