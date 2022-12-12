@@ -3,4 +3,13 @@
   <p> <%= link_to "Delete", wallet_path(@wallet), data: {turbo_method: :delete, turbo_confirm: "Are you sure to delete this wallet?"} %> </p>
   <p> <%= link_to "Edit", edit_wallet_path(@wallet) %> </p>
   <p> <%= link_to "Back to wallet", wallets_path(@wallets) %> </p>
+  <p> <%= link_to "Add cryptos", new_wallet_crypto_path(@wallet) %></p>
+
+
+    <% @wallet.cryptos.each do |crypto| %>
+    <%= crypto.name %>
+    <%= crypto.address %>
+    <%= crypto.number %>
+    <% end %>
+
 </div>

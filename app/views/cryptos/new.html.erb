@@ -1,0 +1,12 @@
+<h1>Cryptos</h1>
+
+<%= form_with model: [@wallet, @crypto] do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+  <%= f.label :number %>
+  <%= f.number_field :number %>
+  <%= f.submit %>
+
+<% end %>
