@@ -1,0 +1,6 @@
+<div class="container">
+  <p> <%= @wallet.name %> : <%= @wallet.category %> </p>
+  <p> <%= link_to "Delete", wallet_path(@wallet), data: {turbo_method: :delete, turbo_confirm: "Are you sure to delete this wallet?"} %> </p>
+  <p> <%= link_to "Edit", edit_wallet_path(@wallet) %> </p>
+  <p> <%= link_to "Back to wallet", wallets_path(@wallets) %> </p>
+</div>
