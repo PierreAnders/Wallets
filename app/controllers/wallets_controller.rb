@@ -11,8 +11,11 @@ class WalletsController < ApplicationController
   def create
     @wallet = Wallet.new(wallet_params)
     @wallet.user = current_user
-    @wallet.save
-    redirect_to wallet_path(@wallet)
+    if @wallet.save
+      redirect_to wallet_path(@wallet)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show

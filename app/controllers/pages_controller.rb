@@ -8,4 +8,7 @@ class PagesController < ApplicationController
     @response = Net::HTTP.get(@uri)
     @coins =  JSON.parse(@response)
   end
+
+  def portfolio
+  end
 end
