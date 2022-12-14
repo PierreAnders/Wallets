@@ -3,4 +3,14 @@
     <% @wallets.each do |wallet| %>
       <p> <%= link_to wallet.name, wallet_path(wallet) %> : <%= wallet.category %></p>
     <% end %>
+
+  <div class="card">
+    <% @wallets.each do |wallet| %>
+      <% wallet.cryptos.each do |crypto| %>
+      <%= crypto.name %>
+      <%= crypto.address %>
+      <%= crypto.number %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

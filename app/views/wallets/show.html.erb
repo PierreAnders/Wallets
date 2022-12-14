@@ -1,15 +1,34 @@
 <div class="container">
   <p> <%= @wallet.name %> : <%= @wallet.category %> </p>
-  <p> <%= link_to "Delete", wallet_path(@wallet), data: {turbo_method: :delete, turbo_confirm: "Are you sure to delete this wallet?"} %> </p>
-  <p> <%= link_to "Edit", edit_wallet_path(@wallet) %> </p>
-  <p> <%= link_to "Back to wallet", wallets_path(@wallets) %> </p>
-  <p> <%= link_to "Add cryptos", new_wallet_crypto_path(@wallet) %></p>
 
+<% require 'net/http'
+    require 'json'
+    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur'
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @search_cryptos = JSON.parse(@response) %>
 
+  <div class="card">
     <% @wallet.cryptos.each do |crypto| %>
     <%= crypto.name %>
     <%= crypto.address %>
     <%= crypto.number %>
+    <%
+      @search_cryptos.each do |search_crypto|
+        if crypto.name == search_crypto["name"]
+          @crypto_current_price = search_crypto["current_price"]
+        end
+      end
+    %>
+    <%= @crypto_current_price %>
+    <%= @total_value = crypto.number * @crypto_current_price %>
+    <br>
     <% end %>
+  </div>
+  <br>
+  <p> <%= link_to "Delete", wallet_path(@wallet), data: {turbo_method: :delete, turbo_confirm: "Are you sure to delete this wallet?"} %> </p>
+  <p> <%= link_to "Edit", edit_wallet_path(@wallet) %> </p>
+  <p> <%= link_to "Back to wallet", wallets_path(@wallets) %> </p>
+  <p> <%= link_to "Add cryptos", new_wallet_crypto_path(@wallet) %></p>
 
 </div>
