@@ -1,25 +1,17 @@
 <div class="container">
   <p> <%= @wallet.name %> : <%= @wallet.category %> </p>
 
-<% require 'net/http'
-    require 'json'
-    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur'
-    @uri = URI(@url)
-    @response = Net::HTTP.get(@uri)
-    @search_cryptos = JSON.parse(@response) %>
-
   <div class="card">
     <% @wallet.cryptos.each do |crypto| %>
+      <% @search_cryptos.each do |search_crypto| %>
+        <% if crypto.name == search_crypto["name"] %>
+          <% @crypto_current_price = search_crypto["current_price"] %>
+          <% @crypto_symbol = search_crypto["symbol"] %>
+        <% end %>
+      <% end %>
     <%= crypto.name %>
     <%= crypto.address %>
-    <%= crypto.number %>
-    <%
-      @search_cryptos.each do |search_crypto|
-        if crypto.name == search_crypto["name"]
-          @crypto_current_price = search_crypto["current_price"]
-        end
-      end
-    %>
+    <%= crypto.number %> <%= @crypto_symbol %>
     <%= @crypto_current_price %>
     <%= @total_value = crypto.number * @crypto_current_price %>
     <br>
