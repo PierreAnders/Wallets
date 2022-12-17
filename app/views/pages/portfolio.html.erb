@@ -1,1 +1,50 @@
 <h1>Portfolio</h1>
+<br><br>
+
+<% @portfolio_value = 0 %>
+<% @number_of_crypto = 0 %>
+
+<!-- get pourcentage allocation -->
+<% @wallets.each do |wallet| %>
+    <!-- get number of crypto -->
+    <% @number_of_crypto += wallet.cryptos.size %>
+    <% wallet.cryptos.each do |crypto| %>
+        <% @search_cryptos.each do |search_crypto| %>
+            <% if crypto.name == search_crypto["name"] %>
+                <% @crypto_current_price = search_crypto["current_price"] %>
+            <% end %>
+        <% end %>
+        <!-- get portfolio value -->
+        <% @value = crypto.number * @crypto_current_price %>
+        <% @portfolio_value += @value%>
+    <% end %>
+<% end %>
+
+<p>ASSETS ALLOCATION (<%= @number_of_crypto %>)</p>
+
+<!-- print crypto name / current_value / allocation / wallet name / number of cryptos / value -->
+<% @wallets.each do |wallet| %>
+    <% wallet.cryptos.each do |crypto| %>
+        <p><%= crypto.name %></p>
+
+        <!-- get current_price / symbol -->
+        <% @search_cryptos.each do |search_crypto| %>
+            <% if crypto.name == search_crypto["name"] %>
+                <% @crypto_current_price = search_crypto["current_price"] %>
+                <% @crypto_symbol = search_crypto["symbol"] %>
+            <% end %>
+        <% end %>
+
+        <p> € <%= @crypto_current_price %></p>
+        <% @value = crypto.number * @crypto_current_price %>
+        <p><%= @crypto_poucentage_allocation = ((@value * 100) / @portfolio_value).round(2) %> %</p>
+        <p><%= wallet.name %></p>
+        <p><%= crypto.number %> <%= @crypto_symbol.upcase %></p>
+        <p>€ <%= @value = (crypto.number * @crypto_current_price ).round(2) %></p>
+        <br>
+    <% end %>
+    <br>
+  <% end %>
+
+<!-- print portfolio value -->
+<p>Total: € <%= @portfolio_value.round(2)  %></p>
