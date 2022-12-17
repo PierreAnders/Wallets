@@ -1,4 +1,5 @@
 class WalletsController < ApplicationController
+  before_action :search_for_crypto
 
   def index
     @wallets = Wallet.where(user: current_user)
@@ -20,12 +21,6 @@ class WalletsController < ApplicationController
 
   def show
     @wallet = Wallet.find(params[:id])
-    require 'net/http'
-    require 'json'
-    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur'
-    @uri = URI(@url)
-    @response = Net::HTTP.get(@uri)
-    @search_cryptos = JSON.parse(@response)
   end
 
   def edit
@@ -50,4 +45,12 @@ class WalletsController < ApplicationController
     params.require(:wallet).permit(:name, :category)
   end
 
+  def search_for_crypto
+    require 'net/http'
+    require 'json'
+    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur'
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @search_cryptos = JSON.parse(@response)
+  end
 end

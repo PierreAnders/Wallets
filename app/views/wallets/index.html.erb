@@ -1,16 +1,28 @@
- <div class="container">
-  <h1>Wallets</h1>
-    <% @wallets.each do |wallet| %>
-      <p> <%= link_to wallet.name, wallet_path(wallet) %> : <%= wallet.category %></p>
-    <% end %>
+<div class="container">
+    <h1>Wallets</h1>
+    <% @total_wallet_value = 0 %>
 
-  <div class="card">
-    <% @wallets.each do |wallet| %>
-      <% wallet.cryptos.each do |crypto| %>
-      <%= crypto.name %>
-      <%= crypto.address %>
-      <%= crypto.number %>
-      <% end %>
-    <% end %>
-  </div>
+        <!-- print wallet name / category / number of cryptos / value -->
+        <% @wallets.each do |wallet| %>
+            <p> <%= link_to wallet.name, wallet_path(wallet) %> </p>
+            <p> <%= wallet.category %> </p>
+            <p> <%=  wallet.cryptos.size %> </p>
+
+            <!-- get cryptos details value -->
+            <% wallet.cryptos.each do |crypto| %>
+                <!-- get crypto current price with API -->
+                <% @search_cryptos.each do |search_crypto| %>
+                    <% if crypto.name == search_crypto["name"] %>
+                        <% @crypto_current_price = search_crypto["current_price"] %>
+                    <% end %>
+                <% end %>
+
+            <!-- puts wallet value -->
+            <% @total_crypto_value = crypto.number * @crypto_current_price %>
+            <% @total_wallet_value = @total_wallet_value + @total_crypto_value %>
+            <% end %>
+            <br>
+            <p> <%= @total_wallet_value %> </p>
+            <% @total_wallet_value = 0 %>
+        <% end %>
 </div>
