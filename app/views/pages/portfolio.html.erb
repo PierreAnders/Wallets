@@ -22,45 +22,61 @@
 
 <!-- print crypto name / current_value / allocation / wallet name / number of cryptos / value -->
 <div class="container-portfolio">
-
+    <div class="card-portfolio-header">
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Asset</div>
+        </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Price</div>
+        </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Allocation</div>
+        </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Wallet</div>
+        </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Amount</div>
+        </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Value</div>
+        </div>
+    </div>
     <% @wallets.each do |wallet| %>
             <% wallet.cryptos.each do |crypto| %>
                 <div class="card-portfolio">
-                  <div class="card-portfolio-box">
-                      <p><%= crypto.name %></p>
-                  </div>
-                  <!-- get current_price / symbol -->
-                  <% @search_cryptos.each do |search_crypto| %>
-                      <% if crypto.name == search_crypto["name"] %>
-                          <% @crypto_current_price = search_crypto["current_price"] %>
-                          <% @crypto_symbol = search_crypto["symbol"] %>
-                      <% end %>
-                  <% end %>
-                  <div class="card-portfolio-box">
-                      <p> € <%= @crypto_current_price %></p>
-                  </div>
-                  <div class="card-portfolio-box">
-                      <% @value = crypto.number * @crypto_current_price %>
-                  </div>
-                  <div class="card-portfolio-box">
-                      <p><%= @crypto_poucentage_allocation =
-                            ((@value * 100) / @portfolio_value).round(2) %> %</p>
-                  </div>
-                  <div class="card-portfolio-box">
-                      <p><%= wallet.name %></p>
-                  </div>
-                  <div class="card-portfolio-box">
-                      <p><%= crypto.number %> <%= @crypto_symbol.upcase %></p>
-                  </div>
-                  <div class="card-portfolio-box">
-                      <p>€ <%= @value = (crypto.number * @crypto_current_price ).round(2) %></p>
-                  </div>
-            </div>
+                    <div class="card-portfolio-box">
+                        <div><%= crypto.name %></div>
+                    </div>
+                    <!-- get current_price / symbol -->
+                    <% @search_cryptos.each do |search_crypto| %>
+                        <% if crypto.name == search_crypto["name"] %>
+                            <% @crypto_current_price = search_crypto["current_price"] %>
+                            <% @crypto_symbol = search_crypto["symbol"] %>
+                        <% end %>
+                    <% end %>
+                    <div class="card-portfolio-box">
+                        <div> € <%= @crypto_current_price %></div>
+                    </div>
+                        <% @value = crypto.number * @crypto_current_price %>
+                    <div class="card-portfolio-box">
+                        <div><%= @crypto_poucentage_allocation = ((@value * 100) / @portfolio_value).round(2) %> %</div>
+                    </div>
+                    <div class="card-portfolio-box">
+                        <div><%= wallet.name %></div>
+                    </div>
+                    <div class="card-portfolio-box">
+                        <div><%= crypto.number %> <%= @crypto_symbol.upcase %></div>
+                    </div>
+                    <div class="card-portfolio-box">
+                        <div>€ <%= @value = (crypto.number * @crypto_current_price ).round(2) %></div>
+                    </div>
+                </div>
             <% end %>
     <% end %>
 </div>
 
 <!-- print portfolio value -->
-<div class="m-2">
+<div class="m-2 flex-end">
     <p>Total: € <%= @portfolio_value.round(2)  %></p>
 </div>
