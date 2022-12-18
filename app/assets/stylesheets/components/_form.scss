@@ -1,0 +1,23 @@
+.form_container {
+  margin: 0 auto;
+  width: 600px;
+  text-align: center;
+}
+
+.form_cellule {
+  margin: 20px;
+  border: solid;
+  border-color: rgb(75, 75, 75);
+  border-width: 0.05rem;
+  border-radius: 10px;
+}
+
+.form-title {
+text-decoration: none;
+color: white;
+font-size: 18px;
+}
+
+.form-title:hover {
+  color: rgb(75, 75, 75);
+}

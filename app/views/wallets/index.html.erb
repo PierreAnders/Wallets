@@ -1,13 +1,13 @@
-<div class="container">
-    <h1>Wallets</h1>
+<div class="form_container">
+    <h1>WALLETS</h1>
     <% @total_wallet_value = 0 %>
 
         <!-- print wallet name / category / number of cryptos / value -->
         <% @wallets.each do |wallet| %>
-            <p> <%= link_to wallet.name, wallet_path(wallet) %> </p>
-            <p> <%= wallet.category %> </p>
-            <p> <%=  wallet.cryptos.size %> </p>
-
+            <div class="form_cellule mt-5">
+                <div class="mt-2"><%= link_to wallet.name, wallet_path(wallet), class: "form-title" %></div>
+            <div class="d-flex justify-content-between">
+                <div class="ms-3 me-3 color-medium-grey"><%=  wallet.cryptos.size %> cryptos</div>
             <!-- get cryptos details value -->
             <% wallet.cryptos.each do |crypto| %>
                 <!-- get crypto current price with API -->
@@ -22,7 +22,11 @@
             <% @total_wallet_value = @total_wallet_value + @total_crypto_value %>
             <% end %>
             <br>
-            <p> <%= @total_wallet_value %> </p>
+
+                <div class="ms-3 me-3 color-medium-grey">€ <%= @total_wallet_value.round(2) %></div>
+            </div>
             <% @total_wallet_value = 0 %>
+            </div>
         <% end %>
+    <div class="d-flex m-3"><%= link_to "add wallet", new_wallet_path(@wallet), class: "small-button"  %></div>
 </div>
