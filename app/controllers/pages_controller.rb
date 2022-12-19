@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def home
     require 'net/http'
     require 'json'
-    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur'
+    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
     @coins = JSON.parse(@response)
@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   def portfolio
     require 'net/http'
     require 'json'
-    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur'
+    @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
     @search_cryptos = JSON.parse(@response)

@@ -48,7 +48,7 @@
                 <% end %>
 
                 <div class="card-portfolio-box">
-                    <div><%= crypto.name %></div>
+                    <div><%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto) %></div>
                 </div>
                 <div class="card-portfolio-box">
                     <div>€ <%= (@crypto_current_price).round(2) %></div>
