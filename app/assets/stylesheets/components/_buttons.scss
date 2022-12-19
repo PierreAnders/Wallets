@@ -1,0 +1,35 @@
+.small-button {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+.small-button:hover {
+  color: rgb(75, 75, 75);
+}
+
+.form-button-input {
+  background-color: #111111;
+  padding: 10px;
+  color: rgb(75, 75, 75);
+  border: solid;
+  border: #ffffff;
+  text-align: center;
+  width: 96%;
+}
+
+.grey-button {
+  color: white;
+  background-color: rgb(75, 75, 75);
+  border: none;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.grey-button:hover {
+  background-color: rgb(40, 40, 40);
+}
