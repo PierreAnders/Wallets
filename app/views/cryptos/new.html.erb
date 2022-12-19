@@ -1,12 +1,18 @@
-<h1>Cryptos</h1>
+<div class="form-container-small">
+    <h1>CRYPTOS</h1>
 
-<%= form_with model: [@wallet, @crypto] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :address %>
-  <%= f.text_field :address %>
-  <%= f.label :number %>
-  <%= f.number_field :number, :step => 0.00000001 %>
-  <%= f.submit %>
-
-<% end %>
+        <%= form_with model: [@wallet, @crypto] do |f| %>
+            <div class="form-cellule mt-5">
+                <%= f.text_field :name, placeholder: "Name", class: "form-button-input" %>
+            </div>
+            <div class="form-cellule mt-5">
+                <%= f.text_field :address, placeholder: "Address", class: "form-button-input" %>
+            </div>
+            <div class="form-cellule mt-5">
+                <%= f.number_field :number, placeholder: "Amount", class: "form-button-input", :step => 0.00000001 %>
+            </div>
+            <div>
+                <%= f.submit "Add crypto", class: "grey-button"%>
+            </div>
+</div>
+        <% end %>
