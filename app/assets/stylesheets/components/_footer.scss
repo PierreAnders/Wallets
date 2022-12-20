@@ -2,4 +2,17 @@
   background-color: #1D1D1D;
   height: 80px;
   margin-top: 50px;
+  display: flex;
+  text-align: end;
+}
+
+.external-link {
+  text-decoration: none;
+  color: #979797;
+  font-size: 14px;
+}
+
+.external-link:hover {
+  color: rgb(184, 184, 184);
+  transition-duration: 0.2s;
 }

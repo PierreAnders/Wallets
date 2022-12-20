@@ -1,16 +1,17 @@
 .small-button {
   text-decoration: none;
-  color: white;
+  color: #626262;
   font-size: 14px;
 }
 .small-button:hover {
   color: rgb(75, 75, 75);
+  transition-duration: 0.2s;
 }
 
 .form-button-input {
   background-color: #111111;
   padding: 10px;
-  color: rgb(75, 75, 75);
+  color: rgb(255, 255, 255);
   border: solid;
   border: #ffffff;
   text-align: center;
@@ -32,4 +33,15 @@
 
 .grey-button:hover {
   background-color: rgb(40, 40, 40);
+  transition-duration: 0.2s;
+}
+
+.crypto-link {
+  text-decoration: none;
+  color: white;
+}
+
+.crypto-link:hover {
+  color: rgb(75, 75, 75);
+  transition-duration: 0.2s;
 }
