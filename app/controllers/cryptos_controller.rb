@@ -23,7 +23,6 @@ class CryptosController < ApplicationController
   def update
     @crypto = Crypto.find(params[:id])
     @wallet = Wallet.find(params[:wallet_id])
-    @crypto.wallet = @wallet
     @crypto.update!(crypto_params)
     redirect_to wallet_path(@wallet)
   end
@@ -31,11 +30,9 @@ class CryptosController < ApplicationController
   def destroy
     @crypto = Crypto.find(params[:id])
     @wallet = Wallet.find(params[:wallet_id])
-    @crypto.wallet = @wallet
-    @crypto.update!(crypto_params)
+    @crypto.destroy
     redirect_to wallet_path(@wallet)
   end
-
 
   private
 
