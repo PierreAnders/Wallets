@@ -5,7 +5,7 @@
 }
 .small-button:hover {
   color: rgb(75, 75, 75);
-  transition-duration: 0.5s;
+  transition-duration: 0.2s;
 }
 
 .form-button-input {
@@ -33,5 +33,15 @@
 
 .grey-button:hover {
   background-color: rgb(40, 40, 40);
-  transition-duration: 0.5s;
+  transition-duration: 0.2s;
+}
+
+.crypto-link {
+  text-decoration: none;
+  color: white;
+}
+
+.crypto-link:hover {
+  color: rgb(75, 75, 75);
+  transition-duration: 0.2s;
 }
