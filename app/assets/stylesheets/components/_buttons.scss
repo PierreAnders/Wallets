@@ -18,6 +18,16 @@
   width: 96%;
 }
 
+.form-button-input:active {
+  background-color: #111111;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+  border: solid;
+  border: #ffffff;
+  text-align: center;
+  width: 96%;
+}
+
 .grey-button {
   color: white;
   background-color: rgb(75, 75, 75);
@@ -44,4 +54,8 @@
 .crypto-link:hover {
   color: rgb(75, 75, 75);
   transition-duration: 0.2s;
+}
+
+.crypto_name {
+  background-color: none;
 }

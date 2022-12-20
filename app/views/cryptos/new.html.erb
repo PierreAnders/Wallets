@@ -1,9 +1,9 @@
 <div class="form-container-small">
-    <h1>CRYPTOS</h1>
+    <h1>NEW CRYPTO</h1>
 
         <%= form_with model: [@wallet, @crypto] do |f| %>
             <div class="form-cellule mt-5">
-                <%= f.text_field :name, placeholder: "Name", class: "form-button-input" %>
+                <div class="form-button-input"><%= f.select :name, cryptos: Crypto::SELECT_CRYPTO %></div>
             </div>
             <div class="form-cellule mt-5">
                 <%= f.text_field :address, placeholder: "Address", class: "form-button-input" %>
