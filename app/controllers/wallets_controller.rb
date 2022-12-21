@@ -20,6 +20,7 @@ class WalletsController < ApplicationController
   end
 
   def show
+    @crypto = Crypto.new
     @wallet = Wallet.find(params[:id])
   end
 

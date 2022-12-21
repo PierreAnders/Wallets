@@ -73,7 +73,25 @@
 
 <div class="d-flex">
     <div class="p-2"> Total: € <%= @wallet_value.round(2) %> </div>
-    <div class="p-2"><%= link_to "Add crypto", new_wallet_crypto_path(@wallet), class: "small-button" %></div>
     <div class="p-2"><%= link_to "Edit Wallet", edit_wallet_path(@wallet), class: "small-button"%></div>
     <div class="p-2"><%= link_to "Back to wallets", wallets_path(@wallets), class: "small-button" %></div>
 </div>
+
+<div class="form-container-small mt-5 mb-5">
+    <h1>Add new crypto</h1>
+
+        <%= form_with model: [@wallet, @crypto] do |f| %>
+            <div class="form-cellule mt-5">
+                <div class="form-button-input"><%= f.select :name, cryptos: Crypto::SELECT_CRYPTO %></div>
+            </div>
+            <div class="form-cellule mt-5">
+                <%= f.text_field :address, placeholder: "Address", class: "form-button-input" %>
+            </div>
+            <div class="form-cellule mt-5">
+                <%= f.number_field :number, placeholder: "Amount", class: "form-button-input", :step => 0.00000001 %>
+            </div>
+            <div>
+                <%= f.submit "Add crypto", class: "grey-button"%>
+            </div>
+</div>
+        <% end %>
