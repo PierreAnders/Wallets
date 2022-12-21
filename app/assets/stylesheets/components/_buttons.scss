@@ -16,6 +16,7 @@
   border: #ffffff;
   text-align: center;
   width: 96%;
+  outline: none;
 }
 
 .form-button-input:active {
@@ -56,6 +57,17 @@
   transition-duration: 0.2s;
 }
 
-.crypto_name {
-  background-color: none;
+#crypto_name {
+  background-color: #111111;
+  color: white;
+  border: solid;
+  border-color: rgb(75, 75, 75);
+  border-width: 0.05rem;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+#crypto_address {
+  background-color: #111111;
+  color: white;
 }
