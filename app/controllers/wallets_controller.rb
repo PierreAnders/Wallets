@@ -37,7 +37,7 @@ class WalletsController < ApplicationController
   def destroy
     @wallet = Wallet.find(params[:id])
     @wallet.destroy
-    redirect_to wallets_path, status: :see_other
+    redirect_to wallets_path, status: :see_other, notice: "You have well deleted this wallet"
   end
 
   private

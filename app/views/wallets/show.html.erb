@@ -44,11 +44,13 @@
                   <% if crypto.name == search_crypto["name"] %>
                     <% @crypto_current_price = search_crypto["current_price"] %>
                     <% @crypto_symbol = search_crypto["symbol"] %>
+                    <% @crypto_logo = search_crypto["image"] %>
                   <% end %>
                 <% end %>
 
                 <div class="card-portfolio-box">
-                    <div><%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto.wallet, crypto), class: "crypto-link" %></div>
+                    <div><%= image_tag @crypto_logo, class: "logo-crypto-small" %>
+                    <%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto.wallet, crypto), class: "crypto-link" %></div>
                 </div>
                 <div class="card-portfolio-box d-none d-md-block">
                     <div>€ <%= (@crypto_current_price).round(2) %></div>

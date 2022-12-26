@@ -53,7 +53,7 @@ class CryptosController < ApplicationController
     @crypto = Crypto.find(params[:id])
     @wallet = Wallet.find(params[:wallet_id])
     @crypto.destroy
-    redirect_to wallet_path(@wallet)
+    redirect_to wallet_path(@wallet), notice: "You have well deleted this asset"
   end
 
   private
