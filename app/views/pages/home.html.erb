@@ -11,13 +11,13 @@
             <div class="card-portfolio-box">
                 <div class="color-medium-grey">Price</div>
             </div>
-            <div class="card-portfolio-box">
+            <div class="card-portfolio-box d-none d-md-block">
                 <div class="color-medium-grey">Change(24h)</div>
             </div>
-            <div class="card-portfolio-box">
+            <div class="card-portfolio-box d-none d-md-block">
                 <div class="color-medium-grey">Ath</div>
             </div>
-            <div class="card-portfolio-box">
+            <div class="card-portfolio-box d-none d-md-block">
                 <div class="color-medium-grey">Market Cap</div>
             </div>
         </div>
@@ -33,13 +33,13 @@
             <div class="card-portfolio-box">
                 <div><%= coin["current_price"] %> €</div>
             </div>
-            <div class="card-portfolio-box">
+            <div class="card-portfolio-box d-none d-md-block">
                 <div><%= coin["price_change_percentage_24h"] %> %</div>
             </div>
-            <div class="card-portfolio-box">
+            <div class="card-portfolio-box d-none d-md-block">
                 <div><%= coin["ath"] %> €</div>
             </div>
-            <div class="card-portfolio-box">
+            <div class="card-portfolio-box d-none d-md-block">
                 <div><%= (coin["market_cap"] * 0.000000001).round(2) %> Md €</div>
             </div>
         </div>

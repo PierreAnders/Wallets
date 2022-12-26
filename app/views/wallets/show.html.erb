@@ -20,13 +20,13 @@
                     <div class="card-portfolio-box">
                         <div class="color-medium-grey">Crypto</div>
                     </div>
-                    <div class="card-portfolio-box">
+                    <div class="card-portfolio-box d-none d-md-block">
                         <div class="color-medium-grey">Price</div>
                     </div>
-                    <div class="card-portfolio-box">
+                    <div class="card-portfolio-box d-none d-md-block">
                         <div class="color-medium-grey">Allocation</div>
                     </div>
-                    <div class="card-portfolio-box">
+                    <div class="card-portfolio-box d-none d-md-block">
                         <div class="color-medium-grey">Address</div>
                     </div>
                     <div class="card-portfolio-box">
@@ -44,20 +44,22 @@
                   <% if crypto.name == search_crypto["name"] %>
                     <% @crypto_current_price = search_crypto["current_price"] %>
                     <% @crypto_symbol = search_crypto["symbol"] %>
+                    <% @crypto_logo = search_crypto["image"] %>
                   <% end %>
                 <% end %>
 
                 <div class="card-portfolio-box">
-                    <div><%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto.wallet, crypto), class: "crypto-link" %></div>
+                    <div><%= image_tag @crypto_logo, class: "logo-crypto-small" %>
+                    <%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto.wallet, crypto), class: "crypto-link" %></div>
                 </div>
-                <div class="card-portfolio-box">
+                <div class="card-portfolio-box d-none d-md-block">
                     <div>€ <%= (@crypto_current_price).round(2) %></div>
                 </div>
                     <% @value = crypto.number * @crypto_current_price %>
-                <div class="card-portfolio-box">
+                <div class="card-portfolio-box d-none d-md-block">
                         <div><%= @crypto_poucentage_allocation = ((@value * 100) / @wallet_value).round(2) %> %</div>
                     </div>
-                <div class="card-portfolio-box">
+                <div class="card-portfolio-box d-none d-md-block">
                     <div><%= crypto.address.first(3) %>...<%= crypto.address.last(3) %></div>
                 </div>
                 <div class="card-portfolio-box">
@@ -77,7 +79,7 @@
     <div class="p-2"><%= link_to "Back to wallets", wallets_path(@wallets), class: "small-button" %></div>
 </div>
 
-<div class="form-container-small mt-5 mb-5">
+<div class="form-container mt-5 mb-5">
     <h1>Add new crypto</h1>
 
         <%= form_with model: [@wallet, @crypto] do |f| %>
