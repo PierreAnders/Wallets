@@ -17,5 +17,5 @@ class Crypto < ApplicationRecord
   @cryptos_option.push(search_crypto["name"])
   end
 
-  SELECT_CRYPTO = @cryptos_option
+  SELECT_CRYPTO = @cryptos_option.sort
 end
