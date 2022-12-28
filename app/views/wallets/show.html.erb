@@ -1,21 +1,31 @@
 <% @wallet_value = 0 %>
+<% @wallet_value_change_24 = 0 %>
 
 <% @wallet.cryptos.each do |crypto| %>
                 <% @search_cryptos.each do |search_crypto| %>
                   <% if crypto.name == search_crypto["name"] %>
                     <% @crypto_current_price = search_crypto["current_price"] %>
                     <% @crypto_symbol = search_crypto["symbol"] %>
+                    <% @crypto_change_24h = search_crypto["price_change_percentage_24h"] %>
                   <% end %>
                 <% end %>
 
                     <% @total_value = crypto.number * @crypto_current_price %>
+                    <% @value_change_24 = (@total_value * @crypto_change_24h) / 100 %>
                     <% @wallet_value +=  @total_value %>
+                    <% @wallet_value_change_24 += @value_change_24 %>
 <% end %>
 
-<h1><%= @wallet.name.upcase %> (<%= @wallet.cryptos.size %>)</h1>
+<div class="container-portfolio mb-4">
+    <!-- print wallet value -->
+    <h1 class="m-2">€ <%= @wallet_value.round(2) %></h1>
+    <div class="m-2"> Total balance</div>
+    <div class="m-2 color-medium-grey" ><%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2) %>% (<%=  @wallet_value_change_24.round(2) %> €)</div>
+</div>
+
 
     <div class="container-portfolio">
-
+        <div class="m-2"><%= @wallet.name.upcase %> (<%= @wallet.cryptos.size %>)</div>
         <div class="card-portfolio-header">
                     <div class="card-portfolio-box">
                         <div class="color-medium-grey">Crypto</div>

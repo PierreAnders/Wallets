@@ -1,5 +1,6 @@
 <% @portfolio_value = 0 %>
 <% @number_of_crypto = 0 %>
+<% @portfolio_value_change_24 = 0 %>
 
 <!-- get pourcentage allocation -->
 <% @wallets.each do |wallet| %>
@@ -9,19 +10,29 @@
         <% @search_cryptos.each do |search_crypto| %>
             <% if crypto.name == search_crypto["name"] %>
                 <% @crypto_current_price = search_crypto["current_price"] %>
+                <% @crypto_change_24h = search_crypto["price_change_percentage_24h"] %>
             <% end %>
         <% end %>
         <!-- get portfolio value -->
         <% @value = crypto.number * @crypto_current_price %>
-        <% @portfolio_value += @value%>
+        <% @value_change_24 = (@value * @crypto_change_24h) / 100 %>
+        <% @portfolio_value += @value %>
+        <% @portfolio_value_change_24 += @value_change_24 %>
     <% end %>
 <% end %>
 
-<h1 class="m-2">ASSETS ALLOCATION (<%= @number_of_crypto %>)</h1>
+<div class="container-portfolio mb-4">
+    <!-- print portfolio value -->
+    <h1 class="m-2">€ <%= @portfolio_value.round(2) %></h1>
+    <div class="m-2"> Total balance</div>
+    <div class="m-2 color-medium-grey" ><%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) %>% (<%=  @portfolio_value_change_24.round(2) %> €)</div>
+</div>
+
 
 
 <!-- print crypto name / current_value / allocation / wallet name / number of cryptos / value -->
-<div class="container-portfolio">
+<div class="container-portfolio mb-5">
+    <div class="m-2">ASSETS ALLOCATION (<%= @number_of_crypto %>)</div>
     <div class="card-portfolio-header">
         <div class="card-portfolio-box">
             <div class="color-medium-grey"> Asset</div>
@@ -76,9 +87,4 @@
                 </div>
             <% end %>
     <% end %>
-</div>
-
-<!-- print portfolio value -->
-<div class="m-2 d-flex justify-content-end">
-    <p>Total: € <%= @portfolio_value.round(2)  %></p>
 </div>
