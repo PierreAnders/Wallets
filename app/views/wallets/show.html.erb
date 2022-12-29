@@ -20,8 +20,15 @@
     <!-- print wallet value -->
     <h1 class="m-2">€ <%= @wallet_value.round(2) %></h1>
     <div class="m-2"> Total balance</div>
-    <div class="m-2 color-medium-grey" ><%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2) %>% (<%=  @wallet_value_change_24.round(2) %> €)</div>
+    <div class="m-2 color-medium-grey" >
+    <% if @wallet_value_change_24 >= 0 %>
+        ↗ <%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2) %>% (+<%= @wallet_value_change_24.round(2) %> €)
+    <% else %>
+        ↘ <%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2) * -1 %>% (<%=  @wallet_value_change_24.round(2) %> €)
+    <% end %>
+    </div>
 </div>
+
 
 
     <div class="container-portfolio">

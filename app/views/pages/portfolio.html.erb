@@ -25,7 +25,13 @@
     <!-- print portfolio value -->
     <h1 class="m-2">€ <%= @portfolio_value.round(2) %></h1>
     <div class="m-2"> Total balance</div>
-    <div class="m-2 color-medium-grey" ><%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) %>% (<%=  @portfolio_value_change_24.round(2) %> €)</div>
+    <div class="m-2 color-medium-grey" >
+        <% if @portfolio_value_change_24 >= 0 %>
+            ↗ <%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) %>% (+<%= @portfolio_value_change_24.round(2) %> €)
+        <% else %>
+            ↘ <%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) * -1 %>% (<%=  @portfolio_value_change_24.round(2) %> €)
+        <% end %>
+    </div>
 </div>
 
 
