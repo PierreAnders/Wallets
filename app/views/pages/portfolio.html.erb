@@ -13,7 +13,7 @@
                 <% @crypto_change_24h = search_crypto["price_change_percentage_24h"] %>
             <% end %>
         <% end %>
-        <!-- get portfolio value -->
+        <!-- get portfolio value and change 24h -->
         <% @value = crypto.number * @crypto_current_price %>
         <% @value_change_24 = (@value * @crypto_change_24h) / 100 %>
         <% @portfolio_value += @value %>
@@ -23,13 +23,15 @@
 
 <div class="container-portfolio mb-4">
     <!-- print portfolio value -->
-    <h1 class="m-2">€ <%= @portfolio_value.round(2) %></h1>
-    <div class="m-2"> Total balance</div>
-    <div class="m-2 color-medium-grey" >
+    <h1 class="m-2">€ <%= @portfolio_value.round(2).delimited(delimiter = ' ', separator = ',') %></h1>
+    <div class="m-2 color-medium-grey"> Total balance</div>
+    <div class="m-2" >
         <% if @portfolio_value_change_24 >= 0 %>
-            ↗ <%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) %>% (+<%= @portfolio_value_change_24.round(2) %> €)
+            <div class="text-success">↗ <%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2).delimited(delimiter = ' ', separator = ',') %>%
+            (+<%= @portfolio_value_change_24.round(2).delimited(delimiter = ' ', separator = ',') %> €)</div>
         <% else %>
-            ↘ <%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) * -1 %>% (<%=  @portfolio_value_change_24.round(2) %> €)
+            <div class="text-danger">↘ <%= (((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) * -1).delimited(delimiter = ' ', separator = ',') %>%
+            (<%=  @portfolio_value_change_24.round(2).delimited(delimiter = ' ', separator = ',') %> €)</div>
         <% end %>
     </div>
 </div>
@@ -75,20 +77,20 @@
                         </div>
                     </div>
                     <div class="card-portfolio-box d-none d-md-block">
-                        <div> € <%= @crypto_current_price %></div>
+                        <div> € <%= @crypto_current_price.delimited(delimiter = ' ', separator = ',') %></div>
                     </div>
                         <% @value = crypto.number * @crypto_current_price %>
                     <div class="card-portfolio-box d-none d-md-block">
-                        <div><%= @crypto_poucentage_allocation = ((@value * 100) / @portfolio_value).round(2) %> %</div>
+                        <div><%= @crypto_poucentage_allocation = ((@value * 100) / @portfolio_value).round(2).delimited(delimiter = ' ', separator = ',') %> %</div>
                     </div>
                     <div class="card-portfolio-box d-none d-md-block">
                         <div><%= wallet.name %></div>
                     </div>
                     <div class="card-portfolio-box">
-                        <div><%= crypto.number %> <%= @crypto_symbol.upcase %></div>
+                        <div><%= crypto.number.delimited(delimiter = ' ', separator = ',') %> <%= @crypto_symbol.upcase %></div>
                     </div>
                     <div class="card-portfolio-box">
-                        <div>€ <%= @value = (crypto.number * @crypto_current_price ).round(2) %></div>
+                        <div>€ <%= @value = (crypto.number * @crypto_current_price ).round(2).delimited(delimiter = ' ', separator = ',') %></div>
                     </div>
                 </div>
             <% end %>

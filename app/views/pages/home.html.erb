@@ -24,23 +24,27 @@
     <% @coins.each do |coin| %>
         <div class="card-portfolio">
             <div class="card-portfolio-box">
-                <div><%= coin["market_cap_rank"] %> <%= "-" %>
+                <div class="color-medium-grey"><%= coin["market_cap_rank"] %> <%= "-" %>
                 <%= image_tag coin["image"], class: "logo-crypto" %></div>
             </div>
             <div class="card-portfolio-box">
                 <div><%= coin["name"] %></div>
             </div>
             <div class="card-portfolio-box">
-                <div><%= coin["current_price"] %> €</div>
+                <div><%= coin["current_price"].delimited(delimiter = ' ', separator = ',') %> €</div>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
-                <div><%= coin["price_change_percentage_24h"] %> %</div>
+                <% if coin["price_change_percentage_24h"].to_d >= 0 %>
+                <div class="text-success">↗ <%= coin["price_change_percentage_24h"].to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                <% else %>
+                <div class="text-danger">↘ <%=  (coin["price_change_percentage_24h"] * -1).to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                <% end %>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
-                <div><%= coin["ath"] %> €</div>
+                <div><%= coin["ath"].delimited(delimiter = ' ', separator = ',') %> €</div>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
-                <div><%= (coin["market_cap"] * 0.000000001).round(2) %> Md €</div>
+                <div><%= (coin["market_cap"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
             </div>
         </div>
     <% end %>
