@@ -1,4 +1,100 @@
-<h1 class="m-2">MARKET</h1>
+
+<div class="container-portfolio mb-4">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h1 class="m-2">MARKET</h1>
+        </div>
+        <%= form_with url: root_path, method: :get do |form| %>
+        <div class="m-2">
+            <%= form.text_field :query, placeholder: "Enter coin name", class: "search-input" %>
+            <%= form.submit "Search", class: "grey-button" %>
+        </div>
+    </div>
+    <% end %>
+<% if params[:query].present? %>
+    <% @coins.each do |coin| %>
+        <% if coin["id"] == params[:query].downcase %>
+                <div><%= image_tag coin["image"], class: "logo-crypto" %> <%= coin["name"] %> (<%= coin["symbol"].upcase %>)</div>
+</div>
+
+<div class="container-portfolio mb-4">
+            <div class="row">
+                <div class="col 6">
+                    <div>PRICE STATS</div>
+                    <br>
+                        <div class="color-medium-grey"> Current price :</div>
+                        <div>€ <%= coin["current_price"].delimited(delimiter = ' ', separator = ',') %></div>
+                        <br>
+                        <div class="color-medium-grey"> Price change 24h :</div>
+                        <% if coin["price_change_24h"] >= 0 %>
+                        <div class="text-success">+<%= coin["price_change_24h"].delimited(delimiter = ' ', separator = ',') %> €</div>
+                        <% else  %>
+                        <div class="text-danger"> <%= coin["price_change_24h"].delimited(delimiter = ' ', separator = ',') %> €</div>
+                        <% end %>
+                        <br>
+                        <div class="color-medium-grey"> Price change percentage 24h :</div>
+                        <% if coin["price_change_percentage_24h"].to_d >= 0 %>
+                        <div class="text-success">↗ <%= coin["price_change_percentage_24h"].to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                        <% else %>
+                        <div class="text-danger">↘ <%=  (coin["price_change_percentage_24h"] * -1).to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                        <% end %>
+                        <br>
+                        <div class="color-medium-grey"> High 24h :</div>
+                        <div>€ <%= coin["high_24h"].delimited(delimiter = ' ', separator = ',') %></div>
+                        <br>
+                        <div class="color-medium-grey"> Low 24h :</div>
+                        <div>€ <%= coin["low_24h"].delimited(delimiter = ' ', separator = ',') %></div>
+                        <br>
+                        <div class="color-medium-grey"> Total volume :</div>
+                        <div><%= (coin["total_volume"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
+                        <br>
+                        <div class="color-medium-grey"> Ath :</div>
+                        <div><%= coin["ath"].delimited(delimiter = ' ', separator = ',') %> €</div>
+                        <br>
+                        <div class="color-medium-grey"> Ath change percentage :</div>
+                        <% if coin["ath_change_percentage"].to_d >= 0 %>
+                        <div class="text-success">↗ <%= coin["ath_change_percentage"].to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                        <% else %>
+                        <div class="text-danger">↘ <%=  (coin["ath_change_percentage"] * -1).to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                        <% end %>
+                        <br>
+                        <div class="color-medium-grey"> Ath date :</div>
+                        <div><%= coin["ath_date"].to_date %></div>
+                        <br>
+                </div>
+                <div class="col 6">
+                    <div>MARKET CAP</div>
+                    <br>
+                        <div class="color-medium-grey"> Rank :</div>
+                        <div><%= coin["market_cap_rank"] %></div>
+                        <br>
+                        <div class="color-medium-grey"> Market cap :</div>
+                        <div><%= (coin["market_cap"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
+                        <br>
+                        <div class="color-medium-grey"> Fully diluted valuation :</div>
+                        <div><%= (coin["fully_diluted_valuation"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
+                        <br>
+                    <div>SUPPLY</div>
+                    <br>
+                        <div class="color-medium-grey"> Circulating supply :</div>
+                        <div><%= coin["circulating_supply"].to_i.delimited(delimiter = ' ') %> <%= coin["symbol"].upcase %></div>
+                        <br>
+                        <div class="color-medium-grey"> Total supply :</div>
+                        <div><%= coin["total_supply"].to_i.delimited(delimiter = ' ') %> <%= coin["symbol"].upcase %></div>
+                        <br>
+                        <div class="color-medium-grey"> Max supply :</div>
+                        <% if coin["max_supply"] == nil %>
+                        <div>none</div>
+                        <% else %>
+                        <div><%= coin["max_supply"].to_i.delimited(delimiter = ' ') %> <%= coin["symbol"].upcase %></div>
+                        <% end %>
+                        <br>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>
+</div>
 
 <div class="container-portfolio">
     <div class="card-portfolio-header">
@@ -6,7 +102,7 @@
                 <div class="color-medium-grey">#</div>
             </div>
             <div class="card-portfolio-box">
-                <div class="color-medium-grey">Asset</div>
+                <div class="color-medium-grey">Coin</div>
             </div>
             <div class="card-portfolio-box">
                 <div class="color-medium-grey">Price</div>
