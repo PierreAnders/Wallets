@@ -15,8 +15,9 @@
   border: solid;
   border: #ffffff;
   text-align: center;
-  width: 96%;
+  width: 100%;
   outline: none;
+  border-radius: 10px;
 }
 
 .form-button-input:active {
@@ -50,6 +51,26 @@
 .crypto-link {
   text-decoration: none;
   color: white;
+}
+
+.dark-grey-button {
+  color: white;
+  background-color: rgb(75, 75, 75);
+  border: none;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.dark-grey-button:hover {
+  color: white;
+  background-color: rgb(40, 40, 40);
+  transition-duration: 0.2s;
 }
 
 .crypto-link:hover {

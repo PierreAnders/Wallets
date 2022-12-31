@@ -26,13 +26,13 @@
                     <% end %>
 
                     <div class="ms-3 me-3 color-medium-grey">
-                        € <%= @total_wallet_value.round(2) %>
+                        € <%= @total_wallet_value.round(2).delimited(delimiter = ' ', separator = ',') %>
                     </div>
                 </div>
                 <% @total_wallet_value = 0 %>
             </div>
         <% end %>
     <div class="d-flex m-3">
-        <%= link_to "add wallet", new_wallet_path(@wallet), class: "small-button"  %>
+        <%= link_to "add wallet", new_wallet_path(@wallet), class: "dark-grey-button"  %>
     </div>
 </div>
