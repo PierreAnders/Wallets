@@ -1,8 +1,8 @@
 // Specific CSS for your home-page
 
 .logo-crypto {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .card {
@@ -20,4 +20,27 @@
   font-family: "barlow", sans-serif;
   color: #606060;
   text-transform: uppercase;
+}
+
+.search-input {
+  background-color: #1d1d1d;
+  text-decoration: none;
+  color: white;
+  border: solid;
+  border-color: rgb(75, 75, 75);
+  border-width: 0.05rem;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.container-crypto-details {
+    background-color: #1D1D1D;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 22px;
+}
+
+.card-cryptos-details {
+  display: flex;
+  justify-content: space-between;
 }

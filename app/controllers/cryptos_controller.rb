@@ -4,28 +4,6 @@ class CryptosController < ApplicationController
     @wallet = Wallet.find(params[:wallet_id])
   end
 
-  # def create
-  #   require 'net/http'
-  #   require 'json'
-  #   @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250'
-  #   @uri = URI(@url)
-  #   @response = Net::HTTP.get(@uri)
-  #   @search_cryptos = JSON.parse(@response)
-
-  #   @crypto = Crypto.new(crypto_params)
-  #   @wallet = Wallet.find(params[:wallet_id])
-  #   @crypto.wallet = @wallet
-
-  #   @search_cryptos.each do |search_crypto|
-  #     if search_crypto.find[@crypto.name]
-  #       @crypto.save
-  #       redirect_to wallet_path(@wallet)
-  #     else
-  #       raise
-  #     end
-  #   end
-  # end
-
   def create
     @crypto = Crypto.new(crypto_params)
     @wallet = Wallet.find(params[:wallet_id])

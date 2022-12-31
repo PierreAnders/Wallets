@@ -18,13 +18,15 @@
 
 <div class="container-portfolio mb-4">
     <!-- print wallet value -->
-    <h1 class="m-2">€ <%= @wallet_value.round(2) %></h1>
-    <div class="m-2"> Total balance</div>
-    <div class="m-2 color-medium-grey" >
+    <h1 class="m-2">€ <%= @wallet_value.round(2).delimited(delimiter = ' ', separator = ',') %></h1>
+    <div class="m-2 color-medium-grey"> Total balance</div>
+    <div class="m-2" >
     <% if @wallet_value_change_24 >= 0 %>
-        ↗ <%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2) %>% (+<%= @wallet_value_change_24.round(2) %> €)
+        <div class="text-success">↗ <%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2).delimited(delimiter = ' ', separator = ',') %>%
+        (+<%= @wallet_value_change_24.round(2).delimited(delimiter = ' ', separator = ',') %> €)</div>
     <% else %>
-        ↘ <%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2) * -1 %>% (<%=  @wallet_value_change_24.round(2) %> €)
+        <div class="text-danger">↘ <%= (((@wallet_value_change_24 * 100) / @wallet_value).round(2) * -1).delimited(delimiter = ' ', separator = ',') %>%
+        (<%=  @wallet_value_change_24.round(2).delimited(delimiter = ' ', separator = ',') %> €)</div>
     <% end %>
     </div>
 </div>
@@ -35,7 +37,7 @@
         <div class="m-2"><%= @wallet.name.upcase %> (<%= @wallet.cryptos.size %>)</div>
         <div class="card-portfolio-header">
                     <div class="card-portfolio-box">
-                        <div class="color-medium-grey">Crypto</div>
+                        <div class="color-medium-grey">Coin</div>
                     </div>
                     <div class="card-portfolio-box d-none d-md-block">
                         <div class="color-medium-grey">Price</div>
@@ -70,20 +72,20 @@
                     <%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto.wallet, crypto), class: "crypto-link" %></div>
                 </div>
                 <div class="card-portfolio-box d-none d-md-block">
-                    <div>€ <%= (@crypto_current_price).round(2) %></div>
+                    <div>€ <%= (@crypto_current_price).round(2).delimited(delimiter = ' ', separator = ',') %></div>
                 </div>
                     <% @value = crypto.number * @crypto_current_price %>
                 <div class="card-portfolio-box d-none d-md-block">
-                        <div><%= @crypto_poucentage_allocation = ((@value * 100) / @wallet_value).round(2) %> %</div>
+                        <div><%= @crypto_poucentage_allocation = ((@value * 100) / @wallet_value).round(2).delimited(delimiter = ' ', separator = ',') %> %</div>
                     </div>
                 <div class="card-portfolio-box d-none d-md-block">
                     <div><%= crypto.address.first(3) %>...<%= crypto.address.last(3) %></div>
                 </div>
                 <div class="card-portfolio-box">
-                    <div><%= crypto.number %> <%= @crypto_symbol.upcase %></div>
+                    <div><%= crypto.number.delimited(delimiter = ' ', separator = ',') %> <%= @crypto_symbol.upcase %></div>
                 </div>
                 <div class="card-portfolio-box">
-                    <div>€ <%= @total_value = (crypto.number * @crypto_current_price).round(2) %></div>
+                    <div>€ <%= @total_value = (crypto.number * @crypto_current_price).round(2).delimited(delimiter = ' ', separator = ',') %></div>
                 </div>
                 <%  %>
             </div>
@@ -91,7 +93,6 @@
     </div>
 
 <div class="d-flex">
-    <div class="p-2"> Total: € <%= @wallet_value.round(2) %> </div>
     <div class="p-2"><%= link_to "Edit Wallet", edit_wallet_path(@wallet), class: "small-button"%></div>
     <div class="p-2"><%= link_to "Back to wallets", wallets_path(@wallets), class: "small-button" %></div>
 </div>
