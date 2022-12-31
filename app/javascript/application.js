@@ -2,7 +2,3 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
-
-$(".card-deck").sortable({
-  connectWith: '.card-deck'
-});

@@ -29,10 +29,10 @@
     </div>
         <div class="m-2 color-medium-grey"> Total balance</div>
         <div class="m-2" >
-            <% if @portfolio_value_change_24 >= 0 %>
+            <% if @portfolio_value_change_24 > 0 %>
                 <div class="text-success">↗ <%= ((@portfolio_value_change_24 * 100) / @portfolio_value).round(2).delimited(delimiter = ' ', separator = ',') %>%
                 (+<%= @portfolio_value_change_24.round(2).delimited(delimiter = ' ', separator = ',') %> €)</div>
-            <% else %>
+            <% elsif @portfolio_value_change_24 < 0 %>
                 <div class="text-danger">↘ <%= (((@portfolio_value_change_24 * 100) / @portfolio_value).round(2) * -1).delimited(delimiter = ' ', separator = ',') %>%
                 (<%=  @portfolio_value_change_24.round(2).delimited(delimiter = ' ', separator = ',') %> €)</div>
             <% end %>
