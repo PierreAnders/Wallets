@@ -23,46 +23,46 @@
                         <h2 class="m-2">PRICE STATS</h2>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Current price :</div>
-                            <div class="m-2">€ <%= coin["current_price"].delimited(delimiter = ' ', separator = ',') %></div>
+                            <div class="m-2">€ <%= coin["current_price"].delimited(delimiter = ',') %></div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Price change 24h :</div>
                             <% if coin["price_change_24h"] >= 0 %>
-                            <div class="text-success m-2">+<%= coin["price_change_24h"].round(2).delimited(delimiter = ' ', separator = ',') %> €</div>
+                            <div class="text-success m-2">+<%= coin["price_change_24h"].round(2).delimited(delimiter = ',') %> €</div>
                             <% else  %>
-                            <div class="text-danger m-2"> <%= coin["price_change_24h"].round(2).delimited(delimiter = ' ', separator = ',') %> €</div>
+                            <div class="text-danger m-2"> <%= coin["price_change_24h"].round(2).delimited(delimiter = ',') %> €</div>
                             <% end %>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Price change percentage 24h :</div>
                             <% if coin["price_change_percentage_24h"].to_d >= 0 %>
-                            <div class="text-success m-2">↗ <%= coin["price_change_percentage_24h"].to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                            <div class="text-success m-2">↗ <%= coin["price_change_percentage_24h"].to_d.round(2).delimited(delimiter = ',') %>%</div>
                             <% else %>
-                            <div class="text-danger m-2">↘ <%=  (coin["price_change_percentage_24h"] * -1).to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                            <div class="text-danger m-2">↘ <%=  (coin["price_change_percentage_24h"] * -1).to_d.round(2).delimited(delimiter = ',') %>%</div>
                             <% end %>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> High 24h :</div>
-                            <div class="m-2">€ <%= coin["high_24h"].delimited(delimiter = ' ', separator = ',') %></div>
+                            <div class="m-2">€ <%= coin["high_24h"].delimited(delimiter = ',') %></div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Low 24h :</div>
-                            <div class="m-2">€ <%= coin["low_24h"].delimited(delimiter = ' ', separator = ',') %></div>
+                            <div class="m-2">€ <%= coin["low_24h"].delimited(delimiter = ',') %></div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Total volume :</div>
-                            <div class="m-2"><%= (coin["total_volume"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
+                            <div class="m-2"><%= (coin["total_volume"] * 0.000000001).round(2).delimited(delimiter = ',') %> Md €</div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Ath :</div>
-                            <div class="m-2"><%= coin["ath"].delimited(delimiter = ' ', separator = ',') %> €</div>
+                            <div class="m-2"><%= coin["ath"].delimited(delimiter = ',') %> €</div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Ath change percentage :</div>
                             <% if coin["ath_change_percentage"].to_d >= 0 %>
-                            <div class="text-success m-2">↗ <%= coin["ath_change_percentage"].to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                            <div class="text-success m-2">↗ <%= coin["ath_change_percentage"].to_d.round(2).delimited(delimiter = ',') %>%</div>
                             <% else %>
-                            <div class="text-danger m-2">↘ <%=  (coin["ath_change_percentage"] * -1).to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                            <div class="text-danger m-2">↘ <%=  (coin["ath_change_percentage"] * -1).to_d.round(2).delimited(delimiter = ',') %>%</div>
                             <% end %>
                         </div>
                         <div class="card-cryptos-details mt-3">
@@ -80,29 +80,29 @@
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Market cap :</div>
-                            <div class="m-2"><%= (coin["market_cap"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
+                            <div class="m-2"><%= (coin["market_cap"] * 0.000000001).round(2).delimited(delimiter = ',') %> Md €</div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Fully diluted valuation :</div>
-                            <div class="m-2"><%= (coin["fully_diluted_valuation"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
+                            <div class="m-2"><%= (coin["fully_diluted_valuation"] * 0.000000001).round(2).delimited(delimiter = ',') %> Md €</div>
                         </div>
                     </div>
                     <div class="container-crypto-details">
                         <h2 class="m-2">SUPPLY</h2>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Circulating supply :</div>
-                            <div class="m-2"><%= coin["circulating_supply"].to_i.delimited(delimiter = ' ') %> <%= coin["symbol"].upcase %></div>
+                            <div class="m-2"><%= coin["circulating_supply"].to_i.delimited(delimiter = ',') %> <%= coin["symbol"].upcase %></div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Total supply :</div>
-                            <div class="m-2"><%= coin["total_supply"].to_i.delimited(delimiter = ' ') %> <%= coin["symbol"].upcase %></div>
+                            <div class="m-2"><%= coin["total_supply"].to_i.delimited(delimiter = ',') %> <%= coin["symbol"].upcase %></div>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Max supply :</div>
                             <% if coin["max_supply"] == nil %>
                             <div class="m-2">none</div>
                             <% else %>
-                            <div class="m-2"><%= coin["max_supply"].to_i.delimited(delimiter = ' ') %> <%= coin["symbol"].upcase %></div>
+                            <div class="m-2"><%= coin["max_supply"].to_i.delimited(delimiter = ',') %> <%= coin["symbol"].upcase %></div>
                             <% end %>
                         </div>
                     </div>
@@ -143,20 +143,20 @@
                 <div><%= coin["name"] %></div>
             </div>
             <div class="card-portfolio-box">
-                <div><%= coin["current_price"].delimited(delimiter = ' ', separator = ',').to_s %> €</div>
+                <div><%= coin["current_price"].delimited(delimiter = ',') %> €</div>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
                 <% if coin["price_change_percentage_24h"].to_d >= 0 %>
-                <div class="text-success">↗ <%= coin["price_change_percentage_24h"].to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                <div class="text-success">↗ <%= coin["price_change_percentage_24h"].to_d.round(2).delimited(delimiter = ',') %>%</div>
                 <% else %>
-                <div class="text-danger">↘ <%=  (coin["price_change_percentage_24h"] * -1).to_d.round(2).delimited(delimiter = ' ', separator = ',') %>%</div>
+                <div class="text-danger">↘ <%=  (coin["price_change_percentage_24h"] * -1).to_d.round(2).delimited(delimiter = ',') %>%</div>
                 <% end %>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
-                <div><%= coin["ath"].delimited(delimiter = ' ', separator = ',').to_s %> €</div>
+                <div><%= coin["ath"].delimited(delimiter = ',') %> €</div>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
-                <div><%= (coin["market_cap"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
+                <div><%= (coin["market_cap"] * 0.000000001).round(2).delimited(delimiter = ',') %> Md €</div>
             </div>
         </div>
     <% end %>
