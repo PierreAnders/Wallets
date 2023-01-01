@@ -143,7 +143,7 @@
                 <div><%= coin["name"] %></div>
             </div>
             <div class="card-portfolio-box">
-                <div><%= coin["current_price"].delimited(delimiter = ' ', separator = ',') %> €</div>
+                <div><%= coin["current_price"].delimited(delimiter = ' ', separator = ',').to_s %> €</div>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
                 <% if coin["price_change_percentage_24h"].to_d >= 0 %>
@@ -153,7 +153,7 @@
                 <% end %>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
-                <div><%= coin["ath"].delimited(delimiter = ' ', separator = ',') %> €</div>
+                <div><%= coin["ath"].delimited(delimiter = ' ', separator = ',').to_s %> €</div>
             </div>
             <div class="card-portfolio-box d-none d-md-block">
                 <div><%= (coin["market_cap"] * 0.000000001).round(2).delimited(delimiter = ' ', separator = ',') %> Md €</div>
