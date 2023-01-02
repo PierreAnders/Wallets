@@ -6,4 +6,6 @@ class Wallet < ApplicationRecord
   validates :name, uniqueness: { scope: :user_id }
   validates :category, presence: true
 
+  SELECT_CATEGORY = ["Exchange", "Cold Wallet", "Hot Wallet"]
+
 end

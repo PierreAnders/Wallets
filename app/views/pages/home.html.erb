@@ -7,7 +7,9 @@
         <%= form_with url: root_path, method: :get do |form| %>
         <div class="m-2">
             <%= form.select :query, Crypto::SELECT_CRYPTO, include_blank: "select crypto", class: "form-button-input" %>
+        <div class="d-flex justify-content-end">
             <%= form.submit "Search", class: "grey-button" %>
+        </div>
         </div>
     </div>
     <% end %>
@@ -149,7 +151,7 @@
                 <%= image_tag coin["image"], class: "logo-crypto" %></div>
             </div>
             <div class="card-portfolio-box">
-                <div><%= link_to coin["name"], "http://localhost:3000/?query=#{coin["name"]}&commit=Search", class: "crypto-link" %></div>
+                <div><%= link_to coin["name"], "https://www.cryptos-wallets.com/?query=#{coin["name"]}&commit=Search", class: "crypto-link" %></div>
             </div>
             <div class="card-portfolio-box">
                 <div><%= coin["current_price"].delimited(delimiter = ',') %> €</div>
