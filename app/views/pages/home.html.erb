@@ -6,7 +6,7 @@
         </div>
         <%= form_with url: root_path, method: :get do |form| %>
         <div class="m-2">
-            <%= form.text_field :query, placeholder: "Enter coin name", class: "search-input" %>
+            <%= form.select :query, Crypto::SELECT_CRYPTO, include_blank: "select crypto", class: "form-button-input" %>
             <%= form.submit "Search", class: "grey-button" %>
         </div>
     </div>
@@ -14,7 +14,7 @@
 
     <% if params[:query].present? %>
         <% @coins.each do |coin| %>
-            <% if coin["name"] == params[:query].capitalize %>
+            <% if coin["name"] == params[:query] %>
                 <div class="m-2"><%= image_tag coin["image"], class: "logo-crypto" %> <%= coin["name"] %> (<%= coin["symbol"].upcase %>)</div>
 </div>
 

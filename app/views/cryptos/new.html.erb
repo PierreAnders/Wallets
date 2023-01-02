@@ -3,7 +3,7 @@
 
         <%= form_with model: [@wallet, @crypto] do |f| %>
             <div class="form-cellule mt-5">
-                <div class="form-button-input"><%= f.select :name, cryptos: Crypto::SELECT_CRYPTO %></div>
+                <div><%= f.select :name, cryptos: Crypto::SELECT_CRYPTO, class: "form-button-input" %></div>
             </div>
             <div class="form-cellule mt-5">
                 <%= f.text_field :address, placeholder: "Address", class: "form-button-input" %>
