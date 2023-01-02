@@ -11,9 +11,10 @@
         </div>
     </div>
     <% end %>
-<% if params[:query].present? %>
-    <% @coins.each do |coin| %>
-        <% if coin["id"] == params[:query].downcase %>
+
+    <% if params[:query].present? %>
+        <% @coins.each do |coin| %>
+            <% if coin["id"] == params[:query].downcase %>
                 <div class="m-2"><%= image_tag coin["image"], class: "logo-crypto" %> <%= coin["name"] %> (<%= coin["symbol"].upcase %>)</div>
 </div>
 
@@ -114,25 +115,25 @@
 
 <div class="container-portfolio">
     <div class="card-portfolio-header">
-            <div class="card-portfolio-box">
-                <div class="color-medium-grey">#</div>
-            </div>
-            <div class="card-portfolio-box">
-                <div class="color-medium-grey">Coin</div>
-            </div>
-            <div class="card-portfolio-box">
-                <div class="color-medium-grey">Price</div>
-            </div>
-            <div class="card-portfolio-box d-none d-md-block">
-                <div class="color-medium-grey">Change(24h)</div>
-            </div>
-            <div class="card-portfolio-box d-none d-md-block">
-                <div class="color-medium-grey">Ath</div>
-            </div>
-            <div class="card-portfolio-box d-none d-md-block">
-                <div class="color-medium-grey">Market Cap</div>
-            </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">#</div>
         </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Coin</div>
+        </div>
+        <div class="card-portfolio-box">
+            <div class="color-medium-grey">Price</div>
+        </div>
+        <div class="card-portfolio-box d-none d-md-block">
+            <div class="color-medium-grey">Change(24h)</div>
+        </div>
+        <div class="card-portfolio-box d-none d-md-block">
+            <div class="color-medium-grey">Ath</div>
+        </div>
+        <div class="card-portfolio-box d-none d-md-block">
+            <div class="color-medium-grey">Market Cap</div>
+        </div>
+    </div>
     <% @coins.each do |coin| %>
         <div class="card-portfolio">
             <div class="card-portfolio-box">
@@ -160,4 +161,5 @@
             </div>
         </div>
     <% end %>
+    </div>
 </div>
