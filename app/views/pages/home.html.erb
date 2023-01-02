@@ -14,7 +14,7 @@
 
     <% if params[:query].present? %>
         <% @coins.each do |coin| %>
-            <% if coin["id"] == params[:query].downcase %>
+            <% if coin["name"] == params[:query].capitalize %>
                 <div class="m-2"><%= image_tag coin["image"], class: "logo-crypto" %> <%= coin["name"] %> (<%= coin["symbol"].upcase %>)</div>
 </div>
 
@@ -85,7 +85,11 @@
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Fully diluted valuation :</div>
+                            <% if coin["fully_diluted_valuation"] == nil %>
+                            <div class="m-2">-</div>
+                            <% else %>
                             <div class="m-2"><%= (coin["fully_diluted_valuation"] * 0.000000001).round(2).delimited(delimiter = ',') %> Md €</div>
+                            <% end %>
                         </div>
                     </div>
                     <div class="container-crypto-details">
@@ -96,12 +100,16 @@
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Total supply :</div>
+                             <% if coin["total_supply"] == nil %>
+                            <div class="m-2">-</div>
+                            <% else %>
                             <div class="m-2"><%= coin["total_supply"].to_i.delimited(delimiter = ',') %> <%= coin["symbol"].upcase %></div>
+                            <% end %>
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Max supply :</div>
                             <% if coin["max_supply"] == nil %>
-                            <div class="m-2">none</div>
+                            <div class="m-2">-</div>
                             <% else %>
                             <div class="m-2"><%= coin["max_supply"].to_i.delimited(delimiter = ',') %> <%= coin["symbol"].upcase %></div>
                             <% end %>
@@ -141,7 +149,7 @@
                 <%= image_tag coin["image"], class: "logo-crypto" %></div>
             </div>
             <div class="card-portfolio-box">
-                <div><%= coin["name"] %></div>
+                <div><%= link_to coin["name"], "http://localhost:3000/?query=#{coin["name"]}&commit=Search", class: "crypto-link" %></div>
             </div>
             <div class="card-portfolio-box">
                 <div><%= coin["current_price"].delimited(delimiter = ',') %> €</div>
