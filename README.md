@@ -1,1 +1,1 @@
-
+This application allows you to have a global view of all your cryptos. By creating your different wallets (exchange, cold wallet, hot wallet), and adding your cryptos, you will have access to your portfolio.
