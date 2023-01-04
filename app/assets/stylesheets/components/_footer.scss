@@ -16,3 +16,14 @@
   color: rgb(184, 184, 184);
   transition-duration: 0.2s;
 }
+
+.logo-github {
+  width: 25px;
+  height: 25px;
+  opacity: 0.5;
+  margin-top: 30px;
+}
+
+.logo-github:hover {
+  opacity: 0.75;
+}
