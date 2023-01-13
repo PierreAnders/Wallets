@@ -17,4 +17,8 @@ class PagesController < ApplicationController
     @search_cryptos = JSON.parse(@response)
     @wallets = Wallet.where(user: current_user)
   end
+
+  def transaction
+  end
+
 end

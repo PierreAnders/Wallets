@@ -21,7 +21,7 @@
     <% end %>
 <% end %>
 
-<div class="container-portfolio mb-4">
+<div class="container container-portfolio mb-4">
     <!-- print portfolio value -->
     <div class="card-cryptos-details">
         <h1 class="m-2">€ <%= @portfolio_value.round(2).delimited(delimiter = ',') %></h1>
@@ -42,7 +42,7 @@
 
 
 <!-- print crypto name / current_value / allocation / wallet name / number of cryptos / value -->
-<div class="container-portfolio">
+<div class="container container-portfolio">
     <div class="card-portfolio-header">
         <div class="card-portfolio-box">
             <div class="color-medium-grey">Coin</div>
@@ -98,6 +98,6 @@
             <% end %>
     <% end %>
 </div>
-<div class="d-flex mb-5">
+<div class="container d-flex mb-5">
     <div class="p-2"><%= link_to "Add Wallet", new_wallet_path(@wallet), class: "dark-grey-button"%></div>
 </div>
