@@ -1,5 +1,4 @@
-
-<div class="container-portfolio">
+<div class="container container-portfolio">
     <div class="d-flex justify-content-between">
         <div>
             <h1 class="m-2">MARKET</h1>
@@ -20,7 +19,7 @@
                 <div class="m-2"><%= image_tag coin["image"], class: "logo-crypto" %> <%= coin["name"] %> (<%= coin["symbol"].upcase %>)</div>
 </div>
 
-            <div class="row">
+            <div class="conatiner row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="container-crypto-details">
                         <h2 class="m-2">PRICE STATS</h2>
@@ -102,7 +101,7 @@
                         </div>
                         <div class="card-cryptos-details mt-3">
                             <div class="color-medium-grey m-2"> Total supply :</div>
-                             <% if coin["total_supply"] == nil %>
+                            <% if coin["total_supply"] == nil %>
                             <div class="m-2">-</div>
                             <% else %>
                             <div class="m-2"><%= coin["total_supply"].to_i.delimited(delimiter = ',') %> <%= coin["symbol"].upcase %></div>
