@@ -1,0 +1,25 @@
+<div class="container">
+<h1>NFTs Collection</h1>
+  <div class="d-flex justify-content-between">
+    <%= form_with url: nft_path, method: :get do |form| %>
+    <div class="">
+        <%= form.text_field :query, placeholder: "Address", class: "form-button-input" %>
+    <div class="d-flex justify-content-end">
+        <%= form.submit "Enter", class: "grey-button" %>
+    </div>
+    <% end %>
+
+  <% if params[:query].present?
+    require 'net/http'
+    require 'json'
+    @url = "https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:#{params[:query]}"
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @nfts = JSON.parse(@response) %>
+
+    <% @nfts["items"].each do |nft| %>
+    <div><img src="<%= nft["meta"]["content"].first["url"] %>" alt=""></div>
+    <% end %>
+  <% end %>
+  </div>
+</div>

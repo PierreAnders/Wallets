@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "/transaction", to: "pages#transaction"
   get "/portfolio", to: "pages#portfolio"
+  get "/nft", to: "pages#nft"
   resources :wallets do
     resources :cryptos
   end

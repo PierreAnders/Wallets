@@ -21,4 +21,23 @@ class PagesController < ApplicationController
   def transaction
   end
 
+  def nft
+  end
+
+  # def nfts
+  # require 'uri'
+  # require 'net/http'
+
+  # url = URI("https://rest.cryptoapis.io/wallet-as-a-service/wallets/60c9d9921c38030006675ff6/bitcoin/testnet?context=yourExampleString")
+
+  # http = Net::HTTP.new(url.host, url.port)
+
+  # request = Net::HTTP::Get.new(url)
+  # request["Content-Type"] = 'application/json'
+  # request["X-API-Key"] = 'my-api-key'
+
+  # response = http.request(request)
+  # puts response.read_body
+  # end
+
 end
