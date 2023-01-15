@@ -1,7 +1,7 @@
 <div class="form-container">
   <h1>NFTs Collection</h1>
     <%= form_with url: nft_path, method: :get do |form| %>
-        <div class="form-cellule mt-5">
+        <div class="mt-5">
             <%= form.text_field :query, placeholder: "Address", class: "form-button-input" %>
         </div>
       <div class=" mt-2 mb-2">
@@ -22,11 +22,15 @@
         <div class="mt-5">
           <% if nft["meta"]["content"].first["url"].present? %>
             <img src="<%= nft["meta"]["content"].first["url"] %>" alt="" width="450px">
+            <% if nft["meta"]["name"].present? %>
+              <div class="color-medium-grey mt-2">
+                <%= nft["meta"]["name"] %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>
     <% rescue => e %>
-      An error occured: <%= e %>
     <% end %>
   <% end %>
 </div>
