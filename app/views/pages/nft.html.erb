@@ -1,12 +1,12 @@
-<div class="container">
-<h1>NFTs Collection</h1>
-  <div class="d-flex justify-content-between">
+<div class="form-container">
+  <h1>NFTs Collection</h1>
     <%= form_with url: nft_path, method: :get do |form| %>
-    <div class="">
-        <%= form.text_field :query, placeholder: "Address", class: "form-button-input" %>
-    <div class="d-flex justify-content-end">
-        <%= form.submit "Enter", class: "grey-button" %>
-    </div>
+        <div class="form-cellule mt-5">
+            <%= form.text_field :query, placeholder: "Address", class: "form-button-input" %>
+        </div>
+      <div class=" mt-2 mb-2">
+          <%= form.submit "Enter", class: "grey-button" %>
+      </div>
     <% end %>
 
   <% if params[:query].present?
@@ -17,9 +17,16 @@
     @response = Net::HTTP.get(@uri)
     @nfts = JSON.parse(@response) %>
 
-    <% @nfts["items"].each do |nft| %>
-    <div><img src="<%= nft["meta"]["content"].first["url"] %>" alt=""></div>
+    <% begin %>
+      <% @nfts["items"].each do |nft| %>
+        <div class="mt-5">
+          <% if nft["meta"]["content"].first["url"].present? %>
+            <img src="<%= nft["meta"]["content"].first["url"] %>" alt="" width="450px">
+          <% end %>
+        </div>
+      <% end %>
+    <% rescue => e %>
+      An error occured: <%= e %>
     <% end %>
   <% end %>
-  </div>
 </div>
