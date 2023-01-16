@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
+  require 'net/http'
+  require 'json'
+
   def home
-    require 'net/http'
-    require 'json'
     @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
@@ -9,8 +10,6 @@ class PagesController < ApplicationController
   end
 
   def portfolio
-    require 'net/http'
-    require 'json'
     @url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
@@ -26,6 +25,9 @@ class PagesController < ApplicationController
   end
 
   def nft
+    @url = "https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:#{params[:query]}"
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @nfts = JSON.parse(@response)
   end
-
 end
