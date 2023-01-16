@@ -16,6 +16,10 @@ class PagesController < ApplicationController
     @response = Net::HTTP.get(@uri)
     @search_cryptos = JSON.parse(@response)
     @wallets = Wallet.where(user: current_user)
+
+    @portfolio_value = 0
+    @number_of_crypto = 0
+    @portfolio_value_change_24h = 0
   end
 
   def transaction
