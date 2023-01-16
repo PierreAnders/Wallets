@@ -14,6 +14,7 @@
 @import "components/footer";
 @import "pages/index";
 
+
 body {
   background-color: #111111;
   color: #ebebeb;
@@ -32,7 +33,6 @@ h2 {
   background-color: #1D1D1D;
   padding: 20px;
   border-radius: 10px;
-
 }
 
 .container-portfolio-box {
@@ -49,6 +49,6 @@ h2 {
   text-align: justify;
 }
 
-#query {
+.query-nfts {
   width: 350px;
 }

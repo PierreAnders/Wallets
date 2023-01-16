@@ -1,6 +1,6 @@
 
 <!-- Search Crypto Form -->
-<div class="container container-portfolio">
+<div class="container container-portfolio mb-4">
   <div class="d-flex justify-content-between">
     <div>
       <h1 class="m-2">MARKET</h1>
@@ -203,32 +203,47 @@
 <% end %>
 </div>
 
-<div class="container container-portfolio">
+<!-- Heading to display all cryptos from API -->
+<div class="container container-portfolio mt-4">
   <div class="card-portfolio-header">
     <div class="card-portfolio-box">
-      <div class="color-medium-grey">#</div>
+      <div class="color-medium-grey">
+        #
+      </div>
     </div>
     <div class="card-portfolio-box">
-      <div class="color-medium-grey">Coin</div>
+      <div class="color-medium-grey">
+        Coin
+      </div>
     </div>
     <div class="card-portfolio-box">
-      <div class="color-medium-grey">Price</div>
+      <div class="color-medium-grey">
+        Price
+      </div>
     </div>
     <div class="card-portfolio-box d-none d-md-block">
-      <div class="color-medium-grey">Change(24h)</div>
+      <div class="color-medium-grey">
+        Change(24h)
+      </div>
     </div>
     <div class="card-portfolio-box d-none d-md-block">
-      <div class="color-medium-grey">Ath</div>
+      <div class="color-medium-grey">
+        Ath
+      </div>
     </div>
     <div class="card-portfolio-box d-none d-md-block">
-      <div class="color-medium-grey">Market Cap</div>
+      <div class="color-medium-grey">
+        Market Cap
+      </div>
     </div>
   </div>
+
+  <!-- Display all cryptos from API -->
   <% @coins.each do |coin| %>
     <div class="card-portfolio">
       <div class="card-portfolio-box">
-        <div class="color-medium-grey"><%= coin["market_cap_rank"] %> <%= "-" %>
-          <%= image_tag coin["image"], class: "logo-crypto" %></div>
+        <div class="color-medium-grey">
+          <%= coin["market_cap_rank"] %> <%= "-" %><%= image_tag coin["image"], class: "logo-crypto" %></div>
       </div>
       <div class="card-portfolio-box">
         <div><%= link_to coin["name"], "https://www.cryptos-wallets.com/?query=#{coin["name"]}&commit=Search", class: "crypto-link" %></div>
@@ -251,5 +266,5 @@
       </div>
     </div>
   <% end %>
-</div>
+  </div>
 </div>

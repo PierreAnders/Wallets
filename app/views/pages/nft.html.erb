@@ -2,7 +2,7 @@
   <h1>NFTs Collection</h1>
     <%= form_with url: nft_path, method: :get do |form| %>
         <div class="mt-5">
-            <%= form.text_field :query, placeholder: "Address Ethereum", class: "form-button-input" %>
+            <%= form.text_field :query, placeholder: "Address Ethereum", class: "form-button-input query-nfts" %>
         </div>
       <div class=" mt-2 mb-2">
           <%= form.submit "Enter", class: "grey-button" %>
