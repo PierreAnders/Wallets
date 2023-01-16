@@ -1,18 +1,22 @@
 <div class="form-container">
-    <h1>EDIT CRYPTO</h1>
-        <%= form_with model: [@wallet, @crypto] do |f| %>
-            <div class="form-cellule mt-5">
-                <div class="form-button-input"><%= @crypto.name %></div>
-            </div>
-            <div class="form-cellule mt-5 mb-4">
-                <%= f.text_field :address, placeholder: @crypto.address, class: "form-button-input" %>
-            </div>
-            <div class="form-cellule mt-5 mb-4">
-                <%= f.number_field :number, placeholder: @crypto.number.to_s, class: "form-button-input" %>
-            </div>
-            <div>
-                <%= f.submit class: "grey-button" %>
-            </div>
-        <% end %>
-    <div class="p-2"><%= link_to "Delete crypto", wallet_crypto_path(@wallet), class: "small-button", data: {turbo_method: :delete, turbo_confirm: "Are yo sure to delete this crypto?"} %></div>
+  <h1>EDIT CRYPTO</h1>
+  <%= form_with model: [@wallet, @crypto] do |f| %>
+  <div class="form-cellule mt-5">
+    <div class="form-button-input">
+      <%= @crypto.name %>
+    </div>
+  </div>
+  <div class="form-cellule mt-5 mb-4">
+    <%= f.text_field :address, placeholder: @crypto.address, class: "form-button-input" %>
+  </div>
+  <div class="form-cellule mt-5 mb-4">
+    <%= f.number_field :number, placeholder: @crypto.number.to_s, class: "form-button-input" %>
+  </div>
+  <div>
+    <%= f.submit class: "grey-button" %>
+  </div>
+  <% end %>
+  <div class="p-2">
+    <%= link_to "Delete crypto", wallet_crypto_path(@wallet), class: "small-button", data: {turbo_method: :delete, turbo_confirm: "Are yo sure to delete this crypto?"} %>
+  </div>
 </div>

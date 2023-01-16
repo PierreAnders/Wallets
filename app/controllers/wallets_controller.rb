@@ -5,9 +5,9 @@ class WalletsController < ApplicationController
     @wallets = Wallet.where(user: current_user)
   end
 
-    def new
-      @wallet = Wallet.new
-    end
+  def new
+    @wallet = Wallet.new
+  end
 
   def create
     @wallet = Wallet.new(wallet_params)
@@ -22,6 +22,9 @@ class WalletsController < ApplicationController
   def show
     @crypto = Crypto.new
     @wallet = Wallet.find(params[:id])
+
+    @wallet_value = 0
+    @wallet_value_change_24h = 0
   end
 
   def edit

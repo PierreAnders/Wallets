@@ -1,19 +1,19 @@
 <div class="form-container">
-    <h1>SIGN IN</h1>
-    <%= form_for(resource, :as => resource_name, url: session_path(resource_name))   do |f| %>
-    <%= devise_error_messages! %>
-        <div class="form-cellule mt-5">
-            <%= f.email_field :email, placeholder: "Email", autofocus: true, class: "form-button-input" %>
-        </div>
-        <div class="form-cellule mt-5">
-            <%= f.password_field :password, placeholder: "Password", class: "form-button-input"%>
-        </div>
-        <div class="mb-5">
-            <%= f.submit "Sign in", class: "grey-button"%>
-        </div>
-    <% end %>
-    <div class="container-portfolio color-medium-grey pt-4 pb-2 mb-5">
-        <p class="justify-text"> This application allows you to have a global view of all your cryptos. By creating your different wallets (exchange, cold wallet, hot wallet), and adding your cryptos, you will have access to your portfolio. This site will not ask you for any access to your accounts and will either not have access to your data.</p>
-    </div>
-    <%= render "devise/shared/links" %>
+  <h1>SIGN IN</h1>
+  <%= form_for(resource, :as => resource_name, url: session_path(resource_name))   do |f| %>
+  <%= devise_error_messages! %>
+  <div class="form-cellule mt-5">
+      <%= f.email_field :email, placeholder: "Email", autofocus: true, class: "form-button-input" %>
+  </div>
+  <div class="form-cellule mt-5">
+    <%= f.password_field :password, placeholder: "Password", class: "form-button-input"%>
+  </div>
+  <div class="mb-5">
+    <%= f.submit "Sign in", class: "grey-button"%>
+  </div>
+  <% end %>
+  <div class="container-portfolio color-medium-grey pt-4 pb-2 mb-5">
+    <p class="justify-text"> This application allows you to have a global view of all your cryptos. By creating your different wallets (exchange, cold wallet, hot wallet), and adding your cryptos, you will have access to your portfolio. This site will not ask you for any access to your accounts and will either not have access to your data.</p>
+  </div>
+  <%= render "devise/shared/links" %>
 </div>

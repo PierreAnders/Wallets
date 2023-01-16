@@ -1,14 +1,16 @@
 <div class="form-container">
-    <h1>NEW WALLET</h1>
-        <%= form_with model: @wallet do |f| %>
-              <div class="form-cellule mt-5">
-                  <%= f.text_field :name, placeholder: "Name", class: "form-button-input" %>
-              </div>
-              <div class="form-cellule mt-5">
-                  <div class="form-button-input"><%= f.select :category, Wallet::SELECT_CATEGORY, include_blank: "select category" %></div>
-              </div>
-              <div>
-                  <%= f.submit class: "grey-button" %>
-              </div>
-        <% end %>
+  <h1>NEW WALLET</h1>
+  <%= form_with model: @wallet do |f| %>
+    <div class="form-cellule mt-5">
+      <%= f.text_field :name, placeholder: "Name", class: "form-button-input" %>
+    </div>
+    <div class="form-cellule mt-5">
+      <div class="form-button-input">
+        <%= f.select :category, Wallet::SELECT_CATEGORY, include_blank: "select category" %>
+      </div>
+    </div>
+    <div>
+      <%= f.submit class: "grey-button" %>
+    </div>
+  <% end %>
 </div>
