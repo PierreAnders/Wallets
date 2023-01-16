@@ -1,32 +1,29 @@
 <div class="form-container">
   <h1>NFTs Collection</h1>
-    <%= form_with url: nft_path, method: :get do |form| %>
-        <div class="form-cellule mt-5">
-            <%= form.text_field :query, placeholder: "Address", class: "form-button-input" %>
-        </div>
-      <div class=" mt-2 mb-2">
-          <%= form.submit "Enter", class: "grey-button" %>
-      </div>
-    <% end %>
+  <%= form_with url: nft_path, method: :get do |form| %>
+    <div class="mt-5">
+      <%= form.text_field :query, placeholder: "Address Ethereum", class: "form-button-input query-nfts" %>
+    </div>
+    <div class=" mt-2 mb-2">
+      <%= form.submit "Enter", class: "grey-button" %>
+    </div>
+  <% end %>
 
-  <% if params[:query].present?
-    require 'net/http'
-    require 'json'
-    @url = "https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:#{params[:query]}"
-    @uri = URI(@url)
-    @response = Net::HTTP.get(@uri)
-    @nfts = JSON.parse(@response) %>
-
+  <% if params[:query].present? %>
     <% begin %>
       <% @nfts["items"].each do |nft| %>
-        <div class="mt-5">
-          <% if nft["meta"]["content"].first["url"].present? %>
-            <img src="<%= nft["meta"]["content"].first["url"] %>" alt="" width="450px">
+      <div class="mt-5">
+        <% if nft["meta"]["content"].first["url"].present? %>
+          <img src="<%= nft["meta"]["content"].first["url"] %>" alt="" width="450px">
+          <% if nft["meta"]["name"].present? %>
+          <div class="color-medium-grey mt-2">
+            <%= nft["meta"]["name"] %>
+          </div>
           <% end %>
-        </div>
+        <% end %>
+      </div>
       <% end %>
     <% rescue => e %>
-      An error occured: <%= e %>
     <% end %>
   <% end %>
 </div>

@@ -1,118 +1,143 @@
-<% @wallet_value = 0 %>
-<% @wallet_value_change_24 = 0 %>
-
 <% @wallet.cryptos.each do |crypto| %>
-                <% @search_cryptos.each do |search_crypto| %>
-                  <% if crypto.name == search_crypto["name"] %>
-                    <% @crypto_current_price = search_crypto["current_price"] %>
-                    <% @crypto_symbol = search_crypto["symbol"] %>
-                    <% @crypto_change_24h = search_crypto["price_change_percentage_24h"] %>
-                  <% end %>
-                <% end %>
-
-                    <% @total_value = crypto.number * @crypto_current_price %>
-                    <% @value_change_24 = (@total_value * @crypto_change_24h) / 100 %>
-                    <% @wallet_value +=  @total_value %>
-                    <% @wallet_value_change_24 += @value_change_24 %>
+  <% @search_cryptos.each do |search_crypto| %>
+    <% if crypto.name == search_crypto["name"] %>
+      <% @crypto_current_price = search_crypto["current_price"] %>
+      <% @crypto_symbol = search_crypto["symbol"] %>
+      <% @crypto_change_24h = search_crypto["price_change_percentage_24h"] %>
+    <% end %>
+  <% end %>
+  <% @total_value = crypto.number * @crypto_current_price %>
+  <% @value_change_24h = (@total_value * @crypto_change_24h) / 100 %>
+  <% @wallet_value +=  @total_value %>
+  <% @wallet_value_change_24h += @value_change_24h %>
 <% end %>
 
+<!-- print wallet value and change 24h -->
 <div class="container container-portfolio mb-4">
-    <!-- print wallet value -->
-    <div class="card-cryptos-details">
-        <h1 class="m-2">€ <%= @wallet_value.round(2).delimited(delimiter = ',') %></h1>
-        <h2 class="m-2"><%= @wallet.name.upcase %> (<%= @wallet.cryptos.size %>)</h2>
+  <div class="card-cryptos-details">
+    <h1 class="m-2">€ <%= @wallet_value.round(2).delimited(delimiter = ',') %></h1>
+    <h2 class="m-2"><%= @wallet.name.upcase %> (<%= @wallet.cryptos.size %>)</h2>
+  </div>
+  <div class="m-2 color-medium-grey">
+    Total balance
+  </div>
+  <div class="m-2" >
+    <% if @wallet_value_change_24h > 0 %>
+      <div class="text-success">
+        ↗ <%= ((@wallet_value_change_24h * 100) / @wallet_value).round(2).delimited(delimiter = ',') %>%
+        (+<%= @wallet_value_change_24h.round(2).delimited(delimiter = ',') %> €)
+      </div>
+    <% elsif @wallet_value_change_24h < 0 %>
+      <div class="text-danger">
+        ↘ <%= (((@wallet_value_change_24h * 100) / @wallet_value).round(2) * -1).delimited(delimiter = ',') %>%
+        (<%=  @wallet_value_change_24h.round(2).delimited(delimiter = ',') %> €)
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- print wallet portfolio -->
+<div class="container container-portfolio">
+  <div class="card-portfolio-header">
+    <div class="card-portfolio-box">
+      <div class="color-medium-grey">
+        Coin
+      </div>
     </div>
-        <div class="m-2 color-medium-grey"> Total balance</div>
-        <div class="m-2" >
-        <% if @wallet_value_change_24 > 0 %>
-            <div class="text-success">↗ <%= ((@wallet_value_change_24 * 100) / @wallet_value).round(2).delimited(delimiter = ',') %>%
-            (+<%= @wallet_value_change_24.round(2).delimited(delimiter = ',') %> €)</div>
-        <% elsif @wallet_value_change_24 < 0 %>
-            <div class="text-danger">↘ <%= (((@wallet_value_change_24 * 100) / @wallet_value).round(2) * -1).delimited(delimiter = ',') %>%
-            (<%=  @wallet_value_change_24.round(2).delimited(delimiter = ',') %> €)</div>
+    <div class="card-portfolio-box d-none d-md-block">
+      <div class="color-medium-grey">
+        Price
+      </div>
+    </div>
+    <div class="card-portfolio-box d-none d-md-block">
+      <div class="color-medium-grey">
+        Allocation
+      </div>
+    </div>
+    <div class="card-portfolio-box d-none d-md-block">
+      <div class="color-medium-grey">
+        Address
+      </div>
+    </div>
+    <div class="card-portfolio-box">
+      <div class="color-medium-grey">
+        Amount
+      </div>
+    </div>
+    <div class="card-portfolio-box">
+      <div class="color-medium-grey">
+        Value
+      </div>
+    </div>
+  </div>
+  <% @wallet.cryptos.sort_by{ |crypto| crypto.name }.each do |crypto| %>
+    <div class="card-portfolio">
+      <% @search_cryptos.each do |search_crypto| %>
+        <% if crypto.name == search_crypto["name"] %>
+          <% @crypto_current_price = search_crypto["current_price"] %>
+          <% @crypto_symbol = search_crypto["symbol"] %>
+          <% @crypto_logo = search_crypto["image"] %>
         <% end %>
+      <% end %>
+      <div class="card-portfolio-box">
+        <div>
+          <%= image_tag @crypto_logo, class: "logo-crypto-small" %>
+          <%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto.wallet, crypto), class: "crypto-link" %>
         </div>
-</div>
-
-
-
-    <div class="container container-portfolio">
-        <div class="card-portfolio-header">
-                    <div class="card-portfolio-box">
-                        <div class="color-medium-grey">Coin</div>
-                    </div>
-                    <div class="card-portfolio-box d-none d-md-block">
-                        <div class="color-medium-grey">Price</div>
-                    </div>
-                    <div class="card-portfolio-box d-none d-md-block">
-                        <div class="color-medium-grey">Allocation</div>
-                    </div>
-                    <div class="card-portfolio-box d-none d-md-block">
-                        <div class="color-medium-grey">Address</div>
-                    </div>
-                    <div class="card-portfolio-box">
-                        <div class="color-medium-grey">Amount</div>
-                    </div>
-                    <div class="card-portfolio-box">
-                        <div class="color-medium-grey">Value</div>
-                    </div>
-                </div>
-
-        <% @wallet.cryptos.sort_by{ |crypto| crypto.name }.each do |crypto| %>
-            <div class="card-portfolio">
-
-                <% @search_cryptos.each do |search_crypto| %>
-                  <% if crypto.name == search_crypto["name"] %>
-                    <% @crypto_current_price = search_crypto["current_price"] %>
-                    <% @crypto_symbol = search_crypto["symbol"] %>
-                    <% @crypto_logo = search_crypto["image"] %>
-                  <% end %>
-                <% end %>
-
-                <div class="card-portfolio-box">
-                    <div><%= image_tag @crypto_logo, class: "logo-crypto-small" %>
-                    <%= link_to "#{crypto.name}", edit_wallet_crypto_path(crypto.wallet, crypto), class: "crypto-link" %></div>
-                </div>
-                <div class="card-portfolio-box d-none d-md-block">
-                    <div>€ <%= (@crypto_current_price).round(2).delimited(delimiter = ',') %></div>
-                </div>
-                    <% @value = crypto.number * @crypto_current_price %>
-                <div class="card-portfolio-box d-none d-md-block">
-                        <div><%= @crypto_poucentage_allocation = ((@value * 100) / @wallet_value).round(2).delimited(delimiter = ',') %> %</div>
-                    </div>
-                <div class="card-portfolio-box d-none d-md-block">
-                    <div><%= crypto.address.first(3) %>...<%= crypto.address.last(3) %></div>
-                </div>
-                <div class="card-portfolio-box">
-                    <div><%= crypto.number.delimited(delimiter = ',') %> <%= @crypto_symbol.upcase %></div>
-                </div>
-                <div class="card-portfolio-box">
-                    <div>€ <%= @total_value = (crypto.number * @crypto_current_price).round(2).delimited(delimiter = ',') %></div>
-                </div>
-            </div>
-        <% end %>
+      </div>
+      <div class="card-portfolio-box d-none d-md-block">
+        <div>
+          € <%= (@crypto_current_price).round(2).delimited(delimiter = ',') %>
+        </div>
+      </div>
+      <% @value = crypto.number * @crypto_current_price %>
+      <div class="card-portfolio-box d-none d-md-block">
+        <div>
+          <%= @crypto_poucentage_allocation = ((@value * 100) / @wallet_value).round(2).delimited(delimiter = ',') %> %
+        </div>
+      </div>
+      <div class="card-portfolio-box d-none d-md-block">
+        <div>
+          <%= crypto.address.first(3) %>...<%= crypto.address.last(3) %>
+        </div>
+      </div>
+      <div class="card-portfolio-box">
+        <div>
+          <%= crypto.number.delimited(delimiter = ',') %> <%= @crypto_symbol.upcase %>
+        </div>
+      </div>
+      <div class="card-portfolio-box">
+        <div>
+          € <%= @total_value = (crypto.number * @crypto_current_price).round(2).delimited(delimiter = ',') %>
+        </div>
+      </div>
     </div>
-
+  <% end %>
+</div>
 <div class="container d-flex">
-    <div class="p-2"><%= link_to "Edit Wallet", edit_wallet_path(@wallet), class: "dark-grey-button"%></div>
-    <div class="p-2"><%= link_to "Back to wallets", wallets_path(@wallets), class: "small-button" %></div>
+  <div class="p-2 mt-3">
+    <%= link_to "Edit Wallet", edit_wallet_path(@wallet), class: "dark-grey-button"%>
+  </div>
+  <div class="p-2 mt-3">
+    <%= link_to "Back to wallets", wallets_path(@wallets), class: "small-button" %>
+  </div>
 </div>
-
 <div class="form-container mt-5 mb-5">
-    <h2>ADD NEW CRYPTO</h2>
-
-        <%= form_with model: [@wallet, @crypto] do |f| %>
-            <div class="form-cellule mt-5">
-                <div class="form-button-input"><%= f.select :name, Crypto::SELECT_CRYPTO, include_blank: "select crypto" %></div>
-            </div>
-            <div class="form-cellule mt-5">
-                <%= f.text_field :address, placeholder: "Address", class: "form-button-input" %>
-            </div>
-            <div class="form-cellule mt-5">
-                <%= f.number_field :number, placeholder: "    Amount", :step => 0.00000001, class: "form-button-input" %>
-            </div>
-            <div>
-                <%= f.submit "Add crypto", class: "grey-button"%>
-            </div>
-</div>
-        <% end %>
+  <h2>ADD NEW CRYPTO</h2>
+  <%= form_with model: [@wallet, @crypto] do |f| %>
+    <div class="form-cellule mt-5">
+      <div class="form-button-input">
+        <%= f.select :name, Crypto::SELECT_CRYPTO, include_blank: "select crypto" %>
+      </div>
+    </div>
+    <div class="form-cellule mt-5">
+      <%= f.text_field :address, placeholder: "Address", class: "form-button-input" %>
+    </div>
+    <div class="form-cellule mt-5">
+      <%= f.number_field :number, placeholder: "    Amount", :step => 0.00000001, class: "form-button-input" %>
+    </div>
+    <div>
+      <%= f.submit "Add crypto", class: "grey-button"%>
+    </div>
+  </div>
+<% end %>
