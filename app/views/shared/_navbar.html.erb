@@ -26,9 +26,6 @@
             <%= link_to "NFTs", nft_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "TRANSACTIONS", transaction_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
             <%= link_to "LOG OUT", destroy_user_session_path(), method: :delete, data: { turbo_method: :delete }, class: "nav-link" %>
           </li>
         <% else %>
@@ -43,9 +40,6 @@
           </li>
           <li class="nav-item">
             <%= link_to "WALLETS", wallets_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "TRANSACTIONS", transaction_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "LOGIN", new_user_session_path, class: "nav-link" %>
