@@ -26,4 +26,35 @@
     <% rescue => e %>
     <% end %>
   <% end %>
+
+  <% @wallets.each do |wallet| %>
+    <% wallet.cryptos.each do |crypto| %>
+      <% if crypto.name == "Ethereum" %>
+        <% @url = "https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:#{crypto.address}" %>
+        <% @uri = URI(@url) %>
+        <% @response = Net::HTTP.get(@uri) %>
+        <% @nfts_from_wallet = JSON.parse(@response) %>
+
+          <div class="mt-5">
+            <%= "NFTs #{crypto.name.upcase} ADDRESS:"%>
+          </div>
+          <div class="color-medium-grey mt-2">
+            <%="#{crypto.address}" %>
+          </div>
+        <% @nfts_from_wallet["items"].each do |nft_from_wallet| %>
+        <div class="mt-5">
+
+          <% if nft_from_wallet["meta"]["content"].first["url"].present? %>
+            <img src="<%= nft_from_wallet["meta"]["content"].first["url"] %>" alt="" width="450px">
+            <% if nft_from_wallet["meta"]["name"].present? %>
+            <div class="color-medium-grey mt-2">
+              <%= nft_from_wallet["meta"]["name"] %>
+            </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>

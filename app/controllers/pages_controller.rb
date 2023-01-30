@@ -29,5 +29,7 @@ class PagesController < ApplicationController
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
     @nfts = JSON.parse(@response)
+
+    @wallets = Wallet.where(user: current_user)
   end
 end
