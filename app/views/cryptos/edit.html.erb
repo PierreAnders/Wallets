@@ -10,7 +10,7 @@
     <%= f.text_field :address, placeholder: @crypto.address, class: "form-button-input" %>
   </div>
   <div class="form-cellule mt-5 mb-4">
-    <%= f.number_field :number, placeholder: @crypto.number.to_s, class: "form-button-input" %>
+    <%= f.number_field :number, placeholder: @crypto.number.to_s, class: "form-button-input", :step => 0.00000001 %>
   </div>
   <div>
     <%= f.submit class: "grey-button" %>
