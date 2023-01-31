@@ -47,42 +47,44 @@
 </div>
 
 <!-- print crypto name / current value / allocation / wallet name / number of cryptos / value -->
-<div class="container container-portfolio mb-3">
-  <div class="card-portfolio-header">
-    <div class="card-portfolio-box">
-      <div class="color-medium-grey">
-        Coin
+<div class="container mb-3">
+  <div class="card-portfolio-separate">
+    <div class="card-portfolio-header">
+      <div class="card-portfolio-box">
+        <div class="color-medium-grey">
+          Coin
+        </div>
       </div>
-    </div>
-    <div class="card-portfolio-box d-none d-md-block">
-      <div class="color-medium-grey">
-        Price
+      <div class="card-portfolio-box d-none d-md-block">
+        <div class="color-medium-grey">
+          Price
+        </div>
       </div>
-    </div>
-    <div class="card-portfolio-box d-none d-md-block">
-      <div class="color-medium-grey">
-        Allocation
+      <div class="card-portfolio-box d-none d-md-block">
+        <div class="color-medium-grey">
+          Allocation
+        </div>
       </div>
-    </div>
-    <div class="card-portfolio-box d-none d-md-block">
-      <div class="color-medium-grey">
-        Wallet
+      <div class="card-portfolio-box d-none d-md-block">
+        <div class="color-medium-grey">
+          Wallet
+        </div>
       </div>
-    </div>
-    <div class="card-portfolio-box">
-      <div class="color-medium-grey">
-        Amount
+      <div class="card-portfolio-box">
+        <div class="color-medium-grey">
+          Amount
+        </div>
       </div>
-    </div>
-    <div class="card-portfolio-box">
-      <div class="color-medium-grey">
-        Value
+      <div class="card-portfolio-box">
+        <div class="color-medium-grey">
+          Value
+        </div>
       </div>
     </div>
   </div>
   <% @wallets.each do |wallet| %>
     <% wallet.cryptos.sort_by{ |crypto| crypto.name }.each do |crypto| %>
-    <div class="card-portfolio">
+  <div class="card-portfolio-separate">
       <div class="card-portfolio-box">
         <div> <!-- get crypto logo / current_price / symbol -->
           <% @search_cryptos.each do |search_crypto| %>
