@@ -3,7 +3,7 @@ class Crypto < ApplicationRecord
 
   validates :name, presence: true
   validates :number, presence: true
-  validates :number, numericality: { greater_than: 0 }
+  validates :number, numericality: { greater_than_or_equal_to: 0 }
 
   require 'net/http'
   require 'json'
