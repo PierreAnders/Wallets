@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  get "/transaction", to: "pages#transaction"
   get "/portfolio", to: "pages#portfolio"
   get "/nft", to: "pages#nft"
+
+  get "/transactions", to: "transactions#index"
+  get "/transfers", to: "transfers#new"
+
   resources :wallets do
-    resources :cryptos
+    resources :cryptos do
+    end
   end
 end
