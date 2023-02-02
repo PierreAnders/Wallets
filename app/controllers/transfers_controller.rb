@@ -1,13 +1,13 @@
 class TransfersController < ApplicationController
-  def new
-    # Code pour transférer des ethers
+  def create
+    # Get form values
+    to = params[:to]
+    amount = params[:amount].to_f
 
-    # Enregistrement des informations sur la transaction
-    #Transaction.create(
-    #sender_address: sender_address,
-    #receiver_address: receiver_address,
-    #value: value,
-    #transaction_hash: transaction_hash
-    #)
+    # Your code to process the transfer
+    # ...
+
+    # Redirect to the transfers history page
+    redirect_to transfers_path
   end
 end
