@@ -1,4 +1,24 @@
 <div class="container">
+  <!-- app/views/transactions/index.html.erb -->
+  <div class="form-container container-portfolio">
+    <div class="m-2" id="from"></div>
+    <div class="m-2" id="balance"></div>
+  </div>
+
+
+<script>
+  document.getElementById("text-to-copy").addEventListener("click", function() {
+    const textToCopy = document.getElementById("text-to-copy");
+    const tempInput = document.createElement("input");
+    tempInput.value = textToCopy.innerText;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    alert("Texte copié : " + textToCopy.innerText);
+  });
+</script>
+
   <div class="form-container mt-5 mb-5">
   <%= form_tag transfers_path, id: "transfer-form" do %>
       <% label_tag :to %>
@@ -11,11 +31,10 @@
       <%= text_field_tag :amount, nil, placeholder: "Amont", class: "form-button-input" %>
     </div>
 
-    <%= hidden_field_tag :from, nil, id: "from-input" %>
-
     <div>
       <%= submit_tag "Send", class: "grey-button" %>
     </div>
+  </div>
   <% end %>
 
   <!-- Load Web3.js -->
@@ -54,11 +73,36 @@
     const form = document.getElementById("transfer-form");
 
     const fromContainer = document.getElementById("from");
-    fromContainer.innerHTML = `Address ${from}`;
+    fromContainer.innerHTML = `
+      <div class="mb-2">
+        ACCOUNT :
+      </div>
+      <div id="text-to-copy" class="mb-4">
+        ${from}
+      </div>
+      `;
+
+    document.getElementById("text-to-copy").addEventListener("click", function() {
+    const textToCopy = document.getElementById("text-to-copy");
+    const tempInput = document.createElement("input");
+    tempInput.value = textToCopy.innerText;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    alert("Texte copié : " + textToCopy.innerText);
+    });
 
     // Display balance account
     const balanceContainer = document.getElementById("balance");
-    balanceContainer.innerHTML = `Balance: ${balanceInEther} ETH`;
+    balanceContainer.innerHTML = `
+      <div class="mb-2">
+        BALANCE :
+      </div>
+      <div class="">
+        ${balanceInEther} ETH
+      </div>
+      `;
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -82,11 +126,4 @@
   });
   });
   </script>
-
-  <!-- app/views/transactions/index.html.erb -->
-    <div class="container">
-      <div id="balance"></div>
-      <div id="from"></div>
-    </div>
-  </div>
 </div>
