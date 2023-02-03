@@ -1,13 +1,22 @@
 class TransfersController < ApplicationController
+
+  def new
+
+  end
+
+
   def create
-    # Get form values
-    to = params[:to]
-    amount = params[:amount].to_f
+    @transfer = Transfer.new(transfer_params)
+    if @transfer.save
+      redirect_to transfers_path
+    else
+      render :new
+    end
+  end
 
-    # Your code to process the transfer
-    # ...
+  private
 
-    # Redirect to the transfers history page
-    redirect_to transfers_path
+  def transfer_params
+    params.require(:transfer).permit(:to, :amount)
   end
 end
