@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get "/portfolio", to: "pages#portfolio"
   get "/nft", to: "pages#nft"
 
-  get "/transactions", to: "transactions#index"
-  get "/transfers", to: "transfers#new"
+  get "/transfers", to: "transfers#index"
+  get "/transfers/new", to: "transfers#new"
 
   resources :wallets do
     resources :cryptos do

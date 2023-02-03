@@ -55,6 +55,7 @@ gem "devise"
 gem 'nreadable', '~> 0.2.1'
 gem 'rarible', '~> 0.1.0'
 gem 'htmlbeautifier'
+gem 'httparty'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

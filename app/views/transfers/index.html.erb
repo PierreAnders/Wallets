@@ -1,0 +1,13 @@
+<% require 'httparty' %>
+
+<%
+  response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=0x04B5f46f2c1655538782063acDAd91EbF105859B&startblock=0&endblock=99999999&sort=asc&apikey=BBEVJRYJKR3QDT95XU2QM686YEGXM7XNN3")
+  transactions = response.parsed_response['result']
+%>
+
+<% transactions.each do |transaction| %>
+  <p>From: <%= transaction['from'] %></p>
+  <p>To: <%= transaction['to'] %></p>
+  <p>Value: <%= transaction['value'] %></p>
+  <hr>
+<% end %>
