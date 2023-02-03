@@ -16,62 +16,67 @@
   <% end %>
   </div>
 
-
     <!-- Load Web3.js -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
 
     <script>
-      window.addEventListener("load", async () => {
-        // Connect to Ethereum network
-        if (window.ethereum) {
-          window.web3 = new Web3(ethereum);
-          try {
-            // Request account access
-            await ethereum.enable();
-          } catch (error) {
-            console.error("User denied account access");
-          }
-        }
-        // Legacy dapp browsers...
-        else if (window.web3) {
-          window.web3 = new Web3(web3.currentProvider);
-        }
-        // Non-dapp browsers...
-        else {
-          console.error("Non-Ethereum browser detected. You should consider trying MetaMask!");
-        }
+    window.addEventListener("load", async () => {
+    // Connect to Ethereum network
+    if (window.ethereum) {
+      window.web3 = new Web3(ethereum);
+      try {
+        // Request account access
+        await ethereum.enable();
+      } catch (error) {
+        console.error("User denied account access");
+      }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      window.web3 = new Web3(web3.currentProvider);
+    }
+    // Non-dapp browsers...
+    else {
+      console.error("Non-Ethereum browser detected. You should consider trying MetaMask!");
+    }
 
-        // Get the first account from the Ethereum network
-        const accounts = await web3.eth.getAccounts();
-        const from = accounts[0];
+    // Get the first account from the Ethereum network
+    const accounts = await web3.eth.getAccounts();
+    const from = accounts[0];
 
+    // Get the balance of the first account in Ether
+    const balance = await web3.eth.getBalance(from);
+    const balanceInEther = web3.utils.fromWei(balance, 'ether');
+    console.log(`Balance of the first account: ${balanceInEther} Ether`);
 
-        // Handle form submission
-        const form = document.getElementById("transfer-form");
-        form.addEventListener("submit", async (event) => {
-          event.preventDefault();
+    // Handle form submission
+    const form = document.getElementById("transfer-form");
 
-          // Get form values
-          const to = form.elements.to.value;
-          const amount = form.elements.amount.value;
+    const balanceContainer = document.getElementById("balance");
+    balanceContainer.innerHTML = `Balance of the first account: ${balanceInEther} Ether`;
 
-          // Convert the amount to wei (the smallest unit of ether)
-          const amountInWei = web3.utils.toWei(amount, "ether");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-          // Send the transaction
-          try {
-            const result = await web3.eth.sendTransaction({ from, to, value: amountInWei });
-            console.log(result);
+      // Get form values
+      const to = form.elements.to.value;
+      const amount = form.elements.amount.value;
 
-            transactionsTable.appendChild(row);
-          } catch (error) {
-            console.error(error);
-          }
-        });
-      });
-    </script>
-  </div>
-</div>
+      // Convert the amount to wei (the smallest unit of ether)
+      const amountInWei = web3.utils.toWei(amount, "ether");
+
+      // Send the transaction
+      try {
+        const result = await web3.eth.sendTransaction({ from, to, value: amountInWei });
+        console.log(result);
+
+        transactionsTable.appendChild(row);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  });
+</script>
 
 <!-- app/views/transactions/index.html.erb -->
 <div class="container">
@@ -91,7 +96,6 @@
   </table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js"></script>
 <script>
   // Check if web3 is available
   if (typeof web3 !== 'undefined') {
@@ -138,8 +142,4 @@
     });
   });
 
-  // Get the current account balance
-  const account = web3.eth.accounts[0];
-  const balance = web3.eth.getBalance(account);
-  document.getElementById("balance").innerHTML = `Your balance is: ${web3.fromWei(balance, 'ether')} ether`;
 </script>
