@@ -10,6 +10,9 @@
       <% label_tag :amount %>
       <%= text_field_tag :amount, nil, placeholder: "Amont", class: "form-button-input" %>
     </div>
+
+    <%= hidden_field_tag :from, nil, id: "from-input" %>
+
     <div>
       <%= submit_tag "Send", class: "grey-button" %>
     </div>
@@ -50,9 +53,12 @@
     // Handle form submission
     const form = document.getElementById("transfer-form");
 
+    const fromContainer = document.getElementById("from");
+    fromContainer.innerHTML = `Address ${from}`;
+
     // Display balance account
     const balanceContainer = document.getElementById("balance");
-    balanceContainer.innerHTML = `Balance of the first account: ${balanceInEther} Ether`;
+    balanceContainer.innerHTML = `Balance: ${balanceInEther} ETH`;
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -77,20 +83,10 @@
   });
   </script>
 
-<!-- app/views/transactions/index.html.erb -->
-<div class="container">
-  <h1>Transactions</h1>
-  <div id="balance"></div>
-</div>
-
-<% require 'httparty' %>
-<% response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=0x04B5f46f2c1655538782063acDAd91EbF105859B&startblock=0&endblock=99999999&sort=asc&apikey=BBEVJRYJKR3QDT95XU2QM686YEGXM7XNN3") %>
-<% transactions = response.parsed_response['result'] %>
-
-<% transactions.each do |transaction| %>
-  <p>From: <%= transaction['from'] %></p>
-  <p>To: <%= transaction['to'] %></p>
-  <p>Value: <%= transaction['value'] %></p>
-  <hr>
-<% end %>
+  <!-- app/views/transactions/index.html.erb -->
+    <div class="container">
+      <div id="balance"></div>
+      <div id="from"></div>
+    </div>
+  </div>
 </div>
