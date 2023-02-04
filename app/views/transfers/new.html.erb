@@ -6,20 +6,6 @@
     <div class="m-2 color-medium-grey">Select an account in your browser wallet and refresh this page</div>
   </div>
 
-
-<script>
-  document.getElementById("text-to-copy").addEventListener("click", function() {
-    const textToCopy = document.getElementById("text-to-copy");
-    const tempInput = document.createElement("input");
-    tempInput.value = textToCopy.innerText;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-    alert("Texte copié : " + textToCopy.innerText);
-  });
-</script>
-
   <div class="form-container mt-5 mb-5">
   <%= form_tag transfers_path, id: "transfer-form" do %>
       <% label_tag :to %>
@@ -72,6 +58,20 @@
 
     // Handle form submission
     const form = document.getElementById("transfer-form");
+
+    // Copy Paste feature for address
+
+    document.getElementById("text-to-copy").addEventListener("click", function() {
+      const textToCopy = document.getElementById("text-to-copy");
+      const tempInput = document.createElement("input");
+      tempInput.value = textToCopy.innerText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      alert("Copied text : " + textToCopy.innerText);
+    });
+
 
     const fromContainer = document.getElementById("from");
     fromContainer.innerHTML = `
@@ -127,4 +127,5 @@
   });
   });
   </script>
+
 </div>

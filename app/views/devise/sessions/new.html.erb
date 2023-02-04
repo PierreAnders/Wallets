@@ -8,8 +8,14 @@
   <div class="form-cellule mt-5">
     <%= f.password_field :password, placeholder: "Password", class: "form-button-input"%>
   </div>
-  <div class="mb-5">
+  <div class="m-4">
     <%= f.submit "Sign in", class: "grey-button"%>
+  </div>
+  <div class="mt-2 color-medium-grey">
+    Remember me
+  </div>
+  <div class="mb-4 mt-2">
+    <%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
   <% end %>
   <div class="container-portfolio color-medium-grey pt-4 pb-2 mb-5">

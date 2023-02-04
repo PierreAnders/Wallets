@@ -77,7 +77,7 @@
           AMOUNT
         </div>
       </div>
-      <div class="card-portfolio-box">
+      <div class="card-portfolio-box d-flex justify-content-end">
         <div class="color-medium-grey">
           VALUE
         </div>
@@ -118,7 +118,7 @@
           <%= crypto.number.delimited(delimiter = ',') %> <%= @crypto_symbol.upcase %>
         </div>
       </div>
-      <div class="card-portfolio-box-separate">
+      <div class="card-portfolio-box-separate d-flex justify-content-end">
         <div>
           € <%= @value = (crypto.number * @crypto_current_price ).round(2).delimited(delimiter = ',') %>
         </div>
