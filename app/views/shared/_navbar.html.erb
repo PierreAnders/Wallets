@@ -14,16 +14,22 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "MARKET", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
             <%= link_to "PORTFOLIO", portfolio_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "WALLETS", wallets_path, class: "nav-link" %>
+            <%= link_to "MARKET", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "SEND", transfers_new_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "TRANSACTIONS", transfers_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "NFTs", nft_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "WALLETS", wallets_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "LOG OUT", destroy_user_session_path(), method: :delete, data: { turbo_method: :delete }, class: "nav-link" %>
