@@ -1,61 +1,63 @@
-<div class="form-container">
-  <h1>NFTs Collection</h1>
-  <%= form_with url: nft_path, method: :get do |form| %>
-    <div class="mt-5">
-      <%= form.text_field :query, placeholder: "Address Ethereum", class: "form-button-input query-nfts" %>
-    </div>
-    <div class=" mt-2 mb-5">
-      <%= form.submit "Enter", class: "grey-button" %>
-    </div>
-  <% end %>
-
-  <% if params[:query].present? %>
-    <% begin %>
-      <% @nfts["items"].each do |nft| %>
+<div class="container">
+  <div class="form-container">
+    <h1>NFTs Collection</h1>
+    <%= form_with url: nft_path, method: :get do |form| %>
       <div class="mt-5">
-        <% if nft["meta"]["content"].first["url"].present? %>
-          <img src="<%= nft["meta"]["content"].first["url"] %>" alt="" width="450px">
-          <% if nft["meta"]["name"].present? %>
-          <div class="color-medium-grey mt-2">
-            <%= nft["meta"]["name"] %>
-          </div>
-          <% end %>
-        <% end %>
+        <%= form.text_field :query, placeholder: "Address Ethereum", class: "form-button-input query-nfts" %>
       </div>
-      <% end %>
-    <% rescue => e %>
+      <div class=" mt-2 mb-5">
+        <%= form.submit "Enter", class: "grey-button" %>
+      </div>
     <% end %>
-  <% end %>
 
-  <% @wallets.each do |wallet| %>
-  <% wallet.cryptos.each do |crypto| %>
-    <% if crypto.name == "Ethereum" %>
-      <% @url = "https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:#{crypto.address}" %>
-      <% @uri = URI(@url) %>
-      <% @response = Net::HTTP.get(@uri) %>
-      <% @nfts_from_wallet = JSON.parse(@response) %>
-        <% if @nfts_from_wallet["items"].present? %>
-          <div class="mt-5">
-            <%= "NFTs #{crypto.name.upcase} ADDRESS:"%>
-          </div>
-          <div class="color-medium-grey mt-2">
-            <%="#{crypto.address}" %>
-          </div>
-          <% @nfts_from_wallet["items"].each do |nft_from_wallet| %>
-            <div class="mt-5">
-            <% begin %>
-              <% if nft_from_wallet["meta"]["content"].first["url"].present? %>
-                <img src="<%= nft_from_wallet["meta"]["content"].first["url"] %>" alt="" width="450px">
-                <div class="color-medium-grey mt-2">
-                  <%= nft_from_wallet["meta"]["name"] %>
-                </div>
-              <% end %>
-            <% rescue => e %>
-            <% end %>
+    <% if params[:query].present? %>
+      <% begin %>
+        <% @nfts["items"].each do |nft| %>
+        <div class="mt-5">
+          <% if nft["meta"]["content"].first["url"].present? %>
+            <img src="<%= nft["meta"]["content"].first["url"] %>" alt="" width="450px">
+            <% if nft["meta"]["name"].present? %>
+            <div class="color-medium-grey mt-2">
+              <%= nft["meta"]["name"] %>
             </div>
+            <% end %>
           <% end %>
+        </div>
         <% end %>
+      <% rescue => e %>
+      <% end %>
+    <% end %>
+
+    <% @wallets.each do |wallet| %>
+    <% wallet.cryptos.each do |crypto| %>
+      <% if crypto.name == "Ethereum" %>
+        <% @url = "https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:#{crypto.address}" %>
+        <% @uri = URI(@url) %>
+        <% @response = Net::HTTP.get(@uri) %>
+        <% @nfts_from_wallet = JSON.parse(@response) %>
+          <% if @nfts_from_wallet["items"].present? %>
+            <div class="mt-5">
+              <%= "NFTs #{crypto.name.upcase} ADDRESS:"%>
+            </div>
+            <div class="color-medium-grey mt-2">
+              <%="#{crypto.address}" %>
+            </div>
+            <% @nfts_from_wallet["items"].each do |nft_from_wallet| %>
+              <div class="mt-5">
+              <% begin %>
+                <% if nft_from_wallet["meta"]["content"].first["url"].present? %>
+                  <img src="<%= nft_from_wallet["meta"]["content"].first["url"] %>" alt="" width="450px">
+                  <div class="color-medium-grey mt-2">
+                    <%= nft_from_wallet["meta"]["name"] %>
+                  </div>
+                <% end %>
+              <% rescue => e %>
+              <% end %>
+              </div>
+            <% end %>
+          <% end %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+  </div>
 </div>
