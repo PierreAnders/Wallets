@@ -1,4 +1,4 @@
-<% require 'dotenv/load'
+<% require 'dotenv/load' %>
 
 <% @wallets = Wallet.where(user: current_user)
     @address_option = []
@@ -9,8 +9,8 @@
         end
       end
     end
-    @api_key = ENV.fetch('API_KEY')
 %>
+
 <div class="container mb-3">
   <div class="form-container">
   <h1 class="mb-5">TRANSACTIONS</h1>
@@ -31,11 +31,11 @@
 
   <!-- If an address is selected then display transactions -->
   <div class="form-container">
-  <% if params[:query].present?
-      require 'httparty'
-      response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=#{params[:query]}&startblock=0&endblock=99999999&sort=asc&apikey=#{@api_key}")
-      transactions = response.parsed_response['result']
-      transactions.reverse_each do |transaction| %>
+  <% if params[:query].present? %>
+      <% require 'httparty' %>
+      <% response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=#{params[:query]}&startblock=0&endblock=99999999&sort=asc&apikey=BBEVJRYJKR3QDT95XU2QM686YEGXM7XNN3") %>
+      <% transactions = response.parsed_response['result'] %>
+      <% transactions.reverse_each do |transaction| %>
       <div class="container-portfolio mb-5">
         <p class="color-medium-grey">From: </p><p><%= transaction['from'] %></p>
         <p class="color-medium-grey">To: </p><p><%= transaction['to'] %></p>
