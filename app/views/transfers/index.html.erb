@@ -1,21 +1,22 @@
 <div class="form-container">
-  <h1 class="mb-5">TRANSACTIONS</h1>
-    <% @wallets.each do |wallet| %>
-      <% wallet.cryptos.each do |crypto| %>
-        <% if crypto.name == "Ethereum" %>
-        <h3><%= crypto.name %> Address :</h3>
-        <h4><%= crypto.address %></h4>
-          <% require 'httparty' %>
-          <% response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=#{crypto.address}&startblock=0&endblock=99999999&sort=asc&apikey=BBEVJRYJKR3QDT95XU2QM686YEGXM7XNN3") %>
-          <% transactions = response.parsed_response['result'] %>
-          <% transactions.reverse_each do |transaction| %>
-          <div class="container-portfolio m-5">
-            <p>From: <%= transaction['from'] %></p>
-            <p>To: <%= transaction['to'] %></p>
-            <p>Amount: <%= (transaction['value'].to_f / 10**18).round(18) %> Ether</p>
-          </div>
-          <% end %>
+<h1 class="mb-5">TRANSACTIONS</h1>
+  <% @wallets.each do |wallet| %>
+    <% wallet.cryptos.each do |crypto| %>
+      <% if crypto.name == "Ethereum" %>
+      <h3 class="color-medium-grey"><%= crypto.name %> Address :</h3>
+      <h4><%= crypto.address %></h4>
+        <% require 'httparty' %>
+        <% response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=#{crypto.address}&startblock=0&endblock=99999999&sort=asc&apikey=BBEVJRYJKR3QDT95XU2QM686YEGXM7XNN3") %>
+        <% transactions = response.parsed_response['result'] %>
+        <% transactions.reverse_each do |transaction| %>
+        <div class="container-portfolio m-5">
+          <p class="color-medium-grey">From: </p><p><%= transaction['from'] %></p>
+          <p class="color-medium-grey">To: </p><p><%= transaction['to'] %></p>
+          <p class="color-medium-grey">Amount: </p><p> <%= (transaction['value'].to_f / 10**18).round(18) %> ETH</p>
+          <p class="color-medium-grey">Date: </p><p> <%= Time.at(transaction['timeStamp'].to_i).strftime("%d/%m/%Y %H:%M:%S") %></p>
+        </div>
         <% end %>
       <% end %>
     <% end %>
+  <% end %>
 </div>
