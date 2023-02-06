@@ -1,3 +1,2 @@
-class Transfer < ApplicationController
-  belongs_to :user
+class Transfer
 end
