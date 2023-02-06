@@ -6,7 +6,7 @@ class TransfersController < ApplicationController
 
   def index
     @wallets = Wallet.where(user: current_user)
-    response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=#{params[:query]}&startblock=0&endblock=99999999&sort=asc&apikey=BBEVJRYJKR3QDT95XU2QM686YEGXM7XNN3")
+    response = HTTParty.get("https://api.etherscan.io/api?module=account&action=txlist&address=#{params[:query]}&startblock=0&endblock=99999999&sort=asc&apikey=#{ENV['API_KEY']}")
     @transactions = response.parsed_response['result']
     @address_option = []
     @wallets.each do |wallet|

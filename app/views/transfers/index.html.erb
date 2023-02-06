@@ -22,10 +22,10 @@
   <% if params[:query].present? %>
     <% @transactions.reverse_each do |transaction| %>
     <div class="container-portfolio mb-5">
+      <p class="color-medium-grey">Date: </p><p> <%= Time.at(transaction['timeStamp'].to_i).strftime("%d/%m/%Y %H:%M:%S") %></p>
       <p class="color-medium-grey">From: </p><p><%= transaction['from'] %></p>
       <p class="color-medium-grey">To: </p><p><%= transaction['to'] %></p>
       <p class="color-medium-grey">Amount: </p><p> <%= (transaction['value'].to_f / 10**18).round(18) %> ETH</p>
-      <p class="color-medium-grey">Date: </p><p> <%= Time.at(transaction['timeStamp'].to_i).strftime("%d/%m/%Y %H:%M:%S") %></p>
     </div>
     <% end %>
   <% end %>
