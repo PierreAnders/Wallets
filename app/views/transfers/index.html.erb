@@ -20,6 +20,10 @@
   <!-- If an address is selected then display the associate transactions -->
   <div class="form-container">
   <% if params[:query].present? %>
+  <div class="container-portfolio mb-5">
+    <h3 class="mb-3">ETHEREUM ADDRESS :</h3>
+    <%= params[:query] %>
+  </div>
     <% @transactions.reverse_each do |transaction| %>
     <div class="container-portfolio mb-5">
       <p class="color-medium-grey">Date: </p><p> <%= Time.at(transaction['timeStamp'].to_i).strftime("%d/%m/%Y %H:%M:%S") %></p>
