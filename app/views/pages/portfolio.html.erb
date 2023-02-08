@@ -102,10 +102,10 @@
       <div class="card-portfolio-box-separate d-none d-md-block">
         € <%= @crypto_current_price.delimited(delimiter = ',') %>
       </div>
-      <% @value = crypto.number * @crypto_current_price %>
+      <% @value_test = crypto.number * @crypto_current_price %>
       <div class="card-portfolio-box-separate d-none d-md-block">
         <div>
-          <%= @crypto_poucentage_allocation = ((@value * 100) / @portfolio_value).round(2).delimited(delimiter = ',') %> %
+          <%= @crypto_poucentage_allocation = ((@value_test * 100) / @portfolio_value).round(2).delimited(delimiter = ',') %> %
         </div>
       </div>
       <div class="card-portfolio-box-separate d-none d-md-block">
@@ -133,4 +133,33 @@
   <div class="pt-2">
     <%= link_to "Add Wallet", new_wallet_path(@wallet), class: "dark-grey-button"%>
   </div>
+</div>
+
+<div class="container container-portfolio mb-4">
+  <% @wallets.each do |wallet| %>
+    <% wallet.cryptos.sort_by{ |crypto| crypto.name }.each do |crypto| %>
+          <% @search_cryptos.each do |search_crypto| %>
+            <% if crypto.name == search_crypto["name"] %>
+            <% @crypto_current_price = search_crypto["current_price"] %>
+            <% @crypto_symbol = search_crypto["symbol"] %>
+            <% end %>
+          <% end %>
+          <% @value_test = crypto.number * @crypto_current_price %>
+          <% @crypto_poucentage_allocation = ((@value_test * 100) / @portfolio_value).round(2).delimited(delimiter = ',') %>
+          <% if crypto.number > 0 %>
+          <% value = 3.5 %>
+          <% width = value * @crypto_poucentage_allocation.to_i %>
+          <% bar = content_tag :div, '', style: "width: #{width}px; height: 30px; background-color: #746e9e;" %>
+          <div class="d-flex justify-content-between">
+            <div>
+              <%= crypto.name %>
+            <%= bar %>
+            </div>
+            <div>
+              <%= @crypto_poucentage_allocation %>%
+            </div>
+          </div>
+          <% end %>
+    <% end %>
+  <% end %>
 </div>
