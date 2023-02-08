@@ -25,6 +25,7 @@ class WalletsController < ApplicationController
 
     @wallet_value = 0
     @wallet_value_change_24h = 0
+
   end
 
   def edit
