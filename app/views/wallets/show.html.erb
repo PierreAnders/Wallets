@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    <% @wallet.cryptos.sort_by{ |crypto| crypto.name }.each do |crypto| %>
+    <% @wallet.cryptos.sort { |crypto| @total_value }.each do |crypto| %>
       <div class="card-portfolio">
         <% @search_cryptos.each do |search_crypto| %>
           <% if crypto.name == search_crypto["name"] %>
