@@ -63,16 +63,6 @@ class WalletsController < ApplicationController
     @response2 = Net::HTTP.get(@uri2)
     @search_cryptos2 = JSON.parse(@response2)
 
-    @url3 = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=3'
-    @uri3 = URI(@url3)
-    @response3 = Net::HTTP.get(@uri3)
-    @search_cryptos3 = JSON.parse(@response3)
-
-    @url4 = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=4'
-    @uri4 = URI(@url4)
-    @response4 = Net::HTTP.get(@uri4)
-    @search_cryptos4 = JSON.parse(@response4)
-
-    @search_cryptos = @search_cryptos1 + @search_cryptos2 + @search_cryptos3 + @search_cryptos4
+    @search_cryptos = @search_cryptos1 + @search_cryptos2
   end
 end

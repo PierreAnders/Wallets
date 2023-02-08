@@ -61,3 +61,33 @@ h4 {
 .query-nfts {
   width: 350px;
 }
+
+.bar-chart {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+.bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #3f51b5;
+}
+
+.bar-1 {
+  height: 70%;
+}
+
+.bar-2 {
+  height: 40%;
+}
+
+.bar-3 {
+  height: 60%;
+}
+
+.bar-4 {
+  height: 30%;
+}
