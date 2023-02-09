@@ -36,6 +36,38 @@ class PagesController < ApplicationController
     @portfolio_value = 0
     @number_of_crypto = 0
     @portfolio_value_change_24h = 0
+    @portfolio_rows = []
+
+    @wallets.each do |wallet|
+
+      wallet.cryptos.sort_by(&:name).each do |crypto|
+        @search_crypto = @search_cryptos.find { |search_crypto| search_crypto["name"] == crypto.name }
+        @crypto_current_price = @search_crypto["current_price"]
+        @crypto_value = crypto.number * @crypto_current_price
+        @portfolio_value += @crypto_value
+      end
+
+      wallet.cryptos.sort_by(&:name).each do |crypto|
+        @search_crypto = @search_cryptos.find { |search_crypto| search_crypto["name"] == crypto.name }
+        @crypto_current_price = @search_crypto["current_price"]
+        @crypto_change_24h = @search_crypto["price_change_percentage_24h"]
+        @crypto_symbol = @search_crypto["symbol"]
+
+        @value = crypto.number * @crypto_current_price
+        @value_change_24h = (@value * @crypto_change_24h) / 100
+        @portfolio_value_change_24h += @value_change_24h
+
+        @portfolio_rows << {
+          name: crypto.name,
+          current_price: @crypto_current_price,
+          allocation: (@value * 100) / @portfolio_value,
+          wallet_name: wallet.name,
+          number: crypto.number,
+          value: @value,
+          symbol: @crypto_symbol
+        }
+      end
+    end
   end
 
   def transaction
