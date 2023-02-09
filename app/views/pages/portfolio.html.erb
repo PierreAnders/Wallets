@@ -1,28 +1,4 @@
-<%= @portfolio_rows.sort_by! { |row| -row[:value] }  %>
-
-
-
-
-
-<!-- get pourcentage allocation -->
-<% @wallets.each do |wallet| %>
-  <!-- get number of crypto -->
-  <% @number_of_crypto += wallet.cryptos.size %>
-  <% wallet.cryptos.each do |crypto| %>
-    <% @search_cryptos.each do |search_crypto| %>
-      <% if crypto.name == search_crypto["name"] %>
-        <% @crypto_current_price = search_crypto["current_price"] %>
-        <% @crypto_change_24h = search_crypto["price_change_percentage_24h"] %>
-      <% end %>
-    <% end %>
-    <!-- get portfolio value -->
-    <% @value = crypto.number * @crypto_current_price %>
-    <% @portfolio_value += @value %>
-    <!-- get portfolio change 24h -->
-    <% @value_change_24h = (@value * @crypto_change_24h) / 100 %>
-    <% @portfolio_value_change_24h += @value_change_24h %>
-  <% end %>
-<% end %>
+<% @portfolio_rows.sort_by! { |row| -row[:value] } %>
 
 <!-- print portfolio value and change 24h -->
 <div class="container mb-3">
@@ -90,47 +66,38 @@
       </div>
     </div>
   </div>
-  <% @wallets.each do |wallet| %>
-    <% wallet.cryptos.sort_by{ |crypto| crypto.name }.each do |crypto| %>
+
+  <% @portfolio_rows.each do |row| %>
   <div class="card-portfolio-separate">
       <div class="card-portfolio-box-separate">
-        <div> <!-- get crypto logo / current_price / symbol -->
-          <% @search_cryptos.each do |search_crypto| %>
-            <% if crypto.name == search_crypto["name"] %>
-            <% @crypto_current_price = search_crypto["current_price"] %>
-            <% @crypto_symbol = search_crypto["symbol"] %>
-            <%= image_tag search_crypto["image"], class: "logo-crypto-small" %>
-            <% end %>
-          <% end %>
-          <%= crypto.name %>
+        <div>
+          <%= row[:name] %>
         </div>
       </div>
       <div class="card-portfolio-box-separate d-none d-md-block">
-        € <%= @crypto_current_price.delimited(delimiter = ',') %>
+        € <%= row[:current_price].delimited(delimiter = ',') %>
       </div>
-      <% @value_test = crypto.number * @crypto_current_price %>
       <div class="card-portfolio-box-separate d-none d-md-block">
         <div>
-          <%= @crypto_poucentage_allocation = ((@value_test * 100) / @portfolio_value).round(2).delimited(delimiter = ',') %> %
+          <%= row[:allocation].round(2).delimited(delimiter = ',') %> %
         </div>
       </div>
       <div class="card-portfolio-box-separate d-none d-md-block">
         <div>
-          <%= wallet.name %>
+          <%= row[:wallet_name] %>
         </div>
       </div>
       <div class="card-portfolio-box-separate">
         <div>
-          <%= crypto.number.delimited(delimiter = ',') %> <%= @crypto_symbol.upcase %>
+          <%= row[:number].delimited(delimiter = ',') %> <%= row[:symbol].upcase %>
         </div>
       </div>
       <div class="card-portfolio-box-separate d-flex justify-content-end">
         <div>
-          € <%= @value = (crypto.number * @crypto_current_price ).round(2).delimited(delimiter = ',') %>
+          € <%= row[:value].round(2).delimited(delimiter = ',') %>
         </div>
       </div>
     </div>
-    <% end %>
   <% end %>
 </div>
 
@@ -142,30 +109,20 @@
 </div>
 
 <div class="container mb-4">
-  <% @wallets.each do |wallet| %>
-    <% wallet.cryptos.sort_by{ |crypto| crypto.name }.each do |crypto| %>
-          <% @search_cryptos.each do |search_crypto| %>
-            <% if crypto.name == search_crypto["name"] %>
-            <% @crypto_current_price = search_crypto["current_price"] %>
-            <% @crypto_symbol = search_crypto["symbol"] %>
-            <% end %>
-          <% end %>
-          <% @value_test = crypto.number * @crypto_current_price %>
-          <% @crypto_poucentage_allocation = ((@value_test * 100) / @portfolio_value).round(2).delimited(delimiter = ',') %>
-          <% if crypto.number > 0 %>
+  <% @portfolio_rows.each do |row| %>
+          <% if row[:number] > 0 %>
           <% value = 3.5 %>
-          <% width = value * @crypto_poucentage_allocation.to_i %>
-
+          <% width = row[:allocation].round(0) * 3.5 %>
             <% bar = content_tag :div, '', style: "width: #{width}px; height: 10px; background-color: #746e9e; border-top-left-radius: 4px; border-bottom-left-radius: 4px;" %>
             <% bar2 = content_tag :div, '', style: "width: #{(value * 100) - width}px; height: 10px; background-color: #3c3c3c; border-top-right-radius: 4px; border-bottom-right-radius: 4px;" %>
         <div class="ms-4">
           <div class="d-flex">
             <div>
-            <%= crypto.name %>
+            <%= row[:name] %>
             </div>
           </div>
             <div class="color-pourcentage">
-            <%= @crypto_poucentage_allocation %>%
+            <%= row[:allocation].round(2) %>%
             </div>
           <div class="d-flex mb-3">
             <%= bar %>
@@ -173,6 +130,5 @@
           </div>
         </div>
           <% end %>
-    <% end %>
   <% end %>
 </div>
