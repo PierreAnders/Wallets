@@ -70,8 +70,11 @@
   <% @portfolio_rows.each do |row| %>
   <div class="card-portfolio-separate">
       <div class="card-portfolio-box-separate">
-        <div>
-          <%= row[:name] %>
+        <div class="d-flex">
+          <div class="pe-2">
+            <%= image_tag row[:image], class: "logo-crypto-small" %>
+          </div>
+        <%= row[:name] %>
         </div>
       </div>
       <div class="card-portfolio-box-separate d-none d-md-block">

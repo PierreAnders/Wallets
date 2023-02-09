@@ -39,7 +39,7 @@ class PagesController < ApplicationController
     @portfolio_rows = []
 
     @wallets.each do |wallet|
-
+      @number_of_crypto += wallet.cryptos.size
       wallet.cryptos.sort_by(&:name).each do |crypto|
         @search_crypto = @search_cryptos.find { |search_crypto| search_crypto["name"] == crypto.name }
         @crypto_current_price = @search_crypto["current_price"]
@@ -52,6 +52,7 @@ class PagesController < ApplicationController
         @crypto_current_price = @search_crypto["current_price"]
         @crypto_change_24h = @search_crypto["price_change_percentage_24h"]
         @crypto_symbol = @search_crypto["symbol"]
+        @crypto_logo = @search_crypto["image"]
 
         @value = crypto.number * @crypto_current_price
         @value_change_24h = (@value * @crypto_change_24h) / 100
@@ -64,7 +65,8 @@ class PagesController < ApplicationController
           wallet_name: wallet.name,
           number: crypto.number,
           value: @value,
-          symbol: @crypto_symbol
+          symbol: @crypto_symbol,
+          image: @crypto_logo
         }
       end
     end
