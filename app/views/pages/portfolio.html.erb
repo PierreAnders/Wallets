@@ -1,3 +1,9 @@
+<%= @portfolio_rows.sort_by! { |row| -row[:value] }  %>
+
+
+
+
+
 <!-- get pourcentage allocation -->
 <% @wallets.each do |wallet| %>
   <!-- get number of crypto -->
