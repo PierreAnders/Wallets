@@ -59,7 +59,7 @@
           AMOUNT
         </div>
       </div>
-      <div class="card-portfolio-box d-flex justify-content-end">
+      <div class="card-portfolio-box">
         <div class="color-medium-grey">
           VALUE
         </div>
@@ -95,7 +95,7 @@
           <%= row[:number].delimited(delimiter = ',') %> <%= row[:symbol].upcase %>
         </div>
       </div>
-      <div class="card-portfolio-box-separate d-flex justify-content-end">
+      <div class="card-portfolio-box-separate">
         <div>
           € <%= row[:value].round(2).delimited(delimiter = ',') %>
         </div>
