@@ -2,6 +2,9 @@
   <h1>NEW CRYPTO</h1>
   <%= form_with model: [@wallet, @crypto] do |f| %>
   <div class="form-cellule mt-5">
+    <div class="form-cellule mt-5">
+      <%= f.text_field :account, placeholder: "Account", class: "form-button-input" %>
+    </div>
     <div>
       <%= f.select :name, cryptos: Crypto::SELECT_CRYPTO, class: "form-button-input" %>
     </div>
