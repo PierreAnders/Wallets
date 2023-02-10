@@ -3,32 +3,34 @@
   <% @total_wallet_value = 0 %>
   <!-- print wallet name / category / number of cryptos / value -->
   <% @wallets.each do |wallet| %>
-    <div class="form-cellule mt-5">
-      <div class="mt-2">
-        <%= link_to wallet.name, wallet_path(wallet), class: "form-title" %>
-      </div>
-      <div class="d-flex justify-content-between">
-        <div class="ms-3 me-3 mb-1 color-medium-grey">
-          <%=  wallet.cryptos.size %> cryptos
+    <%= link_to wallet_path(wallet) do %>
+      <div class="form-cellule mt-5">
+        <div class="mt-2 form-title">
+          <%= wallet.name %>
         </div>
-        <!-- get cryptos details value -->
-        <% wallet.cryptos.each do |crypto| %>
-          <!-- get crypto current price with API -->
-          <% @search_cryptos.each do |search_crypto| %>
-            <% if crypto.name == search_crypto["name"] %>
-              <% @crypto_current_price = search_crypto["current_price"] %>
+        <div class="d-flex justify-content-between">
+          <div class="ms-3 me-3 mb-1 color-medium-grey">
+            <%=  wallet.cryptos.size %> cryptos
+          </div>
+          <!-- get cryptos details value -->
+          <% wallet.cryptos.each do |crypto| %>
+            <!-- get crypto current price with API -->
+            <% @search_cryptos.each do |search_crypto| %>
+              <% if crypto.name == search_crypto["name"] %>
+                <% @crypto_current_price = search_crypto["current_price"] %>
+              <% end %>
             <% end %>
+            <!-- puts wallet value -->
+            <% @total_crypto_value = crypto.number * @crypto_current_price %>
+            <% @total_wallet_value = @total_wallet_value + @total_crypto_value %>
           <% end %>
-          <!-- puts wallet value -->
-          <% @total_crypto_value = crypto.number * @crypto_current_price %>
-          <% @total_wallet_value = @total_wallet_value + @total_crypto_value %>
-        <% end %>
-        <div class="ms-3 me-3 color-medium-grey">
-          € <%= @total_wallet_value.round(2).delimited(delimiter = ' ', separator = ',') %>
+          <div class="ms-3 me-3 color-medium-grey">
+            € <%= @total_wallet_value.round(2).delimited(delimiter = ' ', separator = ',') %>
+          </div>
         </div>
+        <% @total_wallet_value = 0 %>
       </div>
-      <% @total_wallet_value = 0 %>
-    </div>
+    <% end %>
   <% end %>
   <div class="d-flex m-3">
     <%= link_to "add wallet", new_wallet_path(@wallet), class: "dark-grey-button"  %>

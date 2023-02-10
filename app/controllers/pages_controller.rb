@@ -59,6 +59,7 @@ class PagesController < ApplicationController
         @portfolio_value_change_24h += @value_change_24h
 
         @portfolio_rows << {
+          account: crypto.account,
           name: crypto.name,
           current_price: @crypto_current_price,
           allocation: (@value * 100) / @portfolio_value,

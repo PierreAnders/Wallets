@@ -4,6 +4,7 @@ class Crypto < ApplicationRecord
   validates :name, presence: true
   validates :number, presence: true
   validates :number, numericality: { greater_than_or_equal_to: 0 }
+  validates :account, presence: true
 
   require 'net/http'
   require 'json'

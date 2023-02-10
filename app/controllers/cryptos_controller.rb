@@ -37,10 +37,10 @@ class CryptosController < ApplicationController
   private
 
   def crypto_params
-    params.require(:crypto).permit(:name, :address, :number, :wallet_id)
+    params.require(:crypto).permit(:account, :name, :address, :number, :wallet_id)
   end
 
   def crypto__update_params
-    params.require(:crypto).permit(:address, :number, :wallet_id)
+    params.require(:crypto).permit(:account, :address, :number, :wallet_id)
   end
 end
