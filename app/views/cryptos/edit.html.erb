@@ -2,6 +2,9 @@
   <h1>EDIT CRYPTO</h1>
   <%= form_with model: [@wallet, @crypto] do |f| %>
   <div class="form-cellule mt-5">
+    <%= f.text_field :account, placeholder: "Account", class: "form-button-input" %>
+  </div>
+  <div class="form-cellule mt-5">
     <div class="form-button-input">
       <%= @crypto.name %>
     </div>
