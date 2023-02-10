@@ -104,12 +104,6 @@
   <% end %>
 </div>
 
-<!-- link to add a new wallet  -->
-<div class="container d-flex mb-5">
-  <div class="pt-2">
-    <%= link_to "Add Wallet", new_wallet_path(@wallet), class: "dark-grey-button"%>
-  </div>
-</div>
 
 <div class="container mb-4">
   <% @portfolio_rows.each do |row| %>
@@ -134,4 +128,11 @@
         </div>
           <% end %>
   <% end %>
+</div>
+
+<!-- link to add a new wallet  -->
+<div class="container d-flex mb-5">
+  <div class="pt-2">
+    <%= link_to "Add Wallet", new_wallet_path(@wallet), class: "dark-grey-button"%>
+  </div>
 </div>
