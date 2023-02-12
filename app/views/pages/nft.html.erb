@@ -30,14 +30,14 @@
 
     <% @wallets.each do |wallet| %>
     <% wallet.cryptos.each do |crypto| %>
-      <% if crypto.name == "Ethereum" %>
+      <% if crypto.name == "Ethereum" || crypto.name == "Polygon"%>
         <% @url = "https://api.rarible.org/v0.1/items/byOwner/?owner=ETHEREUM:#{crypto.address}" %>
         <% @uri = URI(@url) %>
         <% @response = Net::HTTP.get(@uri) %>
         <% @nfts_from_wallet = JSON.parse(@response) %>
           <% if @nfts_from_wallet["items"].present? %>
             <div class="mt-5">
-              <%= "NFTs #{crypto.name.upcase} ADDRESS:"%>
+              <%= "NFTs ADDRESS:"%>
             </div>
             <div class="color-medium-grey mt-2">
               <%="#{crypto.address}" %>

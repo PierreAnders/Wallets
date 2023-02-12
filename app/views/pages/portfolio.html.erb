@@ -17,12 +17,12 @@
     <div class="m-2" >
     <% if @portfolio_value_change_24h > 0 %>
       <div class="text-success">
-        ↗ <%= ((@portfolio_value_change_24h * 100) / @portfolio_value).round(2).delimited(delimiter = ',') %>%
+        +<%= ((@portfolio_value_change_24h * 100) / @portfolio_value).round(2).delimited(delimiter = ',') %>%
         (+<%= @portfolio_value_change_24h.round(2).delimited(delimiter = ',') %> €)
       </div>
     <% elsif @portfolio_value_change_24h < 0 %>
       <div class="text-danger">
-        ↘ <%= (((@portfolio_value_change_24h * 100) / @portfolio_value).round(2) * -1).delimited(delimiter = ',') %>%
+        - <%= (((@portfolio_value_change_24h * 100) / @portfolio_value).round(2) * -1).delimited(delimiter = ',') %>%
         (<%=  @portfolio_value_change_24h.round(2).delimited(delimiter = ',') %> €)
       </div>
     <% end %>
