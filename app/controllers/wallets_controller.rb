@@ -24,8 +24,42 @@ class WalletsController < ApplicationController
     @wallet = Wallet.find(params[:id])
 
     @wallet_value = 0
+    @number_of_crypto = @wallet.cryptos.size
     @wallet_value_change_24h = 0
+    @wallet_rows = []
 
+    @wallet.cryptos.each do |crypto|
+      @search_crypto = @search_cryptos.find { |search_crypto| search_crypto["name"] == crypto.name }
+      @crypto_current_price = @search_crypto["current_price"]
+      @value = crypto.number * @crypto_current_price
+      @wallet_value += @value
+    end
+
+    @wallet.cryptos.sort_by(&:name).each do |crypto|
+      @search_crypto = @search_cryptos.find { |search_crypto| search_crypto["name"] == crypto.name }
+      @crypto_current_price = @search_crypto["current_price"]
+      @crypto_change_24h = @search_crypto["price_change_percentage_24h"]
+      @crypto_symbol = @search_crypto["symbol"]
+      @crypto_logo = @search_crypto["image"]
+      @value = crypto.number * @crypto_current_price
+      @value_change_24h = (@value * @crypto_change_24h) / 100
+      @wallet_value_change_24h += @value_change_24h
+
+      @wallet_rows << {
+        account: crypto.account,
+        name: crypto.name,
+        current_price: @crypto_current_price,
+        allocation: (@value * 100) / @wallet_value,
+        number: crypto.number,
+        value: @value,
+        symbol: @crypto_symbol,
+        image: @crypto_logo,
+        address: crypto.address,
+        wallet: crypto.wallet,
+        crypto: crypto
+      }
+    end
+    @wallet_rows.sort_by! { |row| -row[:value] }
   end
 
   def edit
