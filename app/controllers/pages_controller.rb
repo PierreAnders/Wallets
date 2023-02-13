@@ -72,6 +72,7 @@ class PagesController < ApplicationController
         }
       end
     end
+    @portfolio_rows.sort_by! { |row| -row[:value] }
   end
 
   def transaction
