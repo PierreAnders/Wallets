@@ -6,7 +6,7 @@ class CoinGeckoService
   
     def get_coins_markets(params = {})
       Rails.cache.fetch('coingecko_data', expires_in: 2.minutes) do
-        uri = URI("#{BASE_URL}coins/markets?vs_currency=eur&order=market_cap_desc&per_page=50&page=1")
+        uri = URI("#{BASE_URL}coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=1")
         response = Net::HTTP.get(uri)
         JSON.parse(response)
       end
