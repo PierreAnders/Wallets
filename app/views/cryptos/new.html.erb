@@ -6,7 +6,7 @@
       <%= f.text_field :account, placeholder: "Account", class: "form-button-input" %>
     </div>
     <div>
-      <%= f.select :name, cryptos: Crypto::SELECT_CRYPTO, class: "form-button-input" %>
+      <%= f.select :name, @select_cryptos, class: "form-button-input" %>
     </div>
   </div>
   <div class="form-cellule mt-5">

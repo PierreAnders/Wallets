@@ -22,7 +22,7 @@ class WalletsController < ApplicationController
   def show
     @crypto = Crypto.new
     @wallet = Wallet.find(params[:id])
-
+    @select_cryptos = CoinGeckoService.new.search_for_crypto.map { |coin| coin["name"] }.sort
     @wallet_value = 0
     @number_of_crypto = @wallet.cryptos.size
     @wallet_value_change_24h = 0
@@ -85,20 +85,6 @@ class WalletsController < ApplicationController
   end
 
   def search_for_crypto
-    require 'net/http'
-    require 'json'
-
-    @url1 = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=1'
-    @uri1 = URI(@url1)
-    @response1 = Net::HTTP.get(@uri1)
-    @search_cryptos1 = JSON.parse(@response1)
-
-    # @url2 = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=250&page=2'
-    # @uri2 = URI(@url2)
-    # @response2 = Net::HTTP.get(@uri2)
-    # @search_cryptos2 = JSON.parse(@response2)
-
-    @search_cryptos = @search_cryptos1
-    # + @search_cryptos2
+    @search_cryptos = CoinGeckoService.new.search_for_crypto
   end
 end
