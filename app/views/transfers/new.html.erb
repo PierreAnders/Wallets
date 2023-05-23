@@ -6,26 +6,23 @@
       <div class="m-2" id="balance"></div>
       <div class="m-2 color-medium-grey">Select an account in your browser wallet and refresh this page</div>
     </div>
-
     <div class="form-container mt-5 mb-5">
-    <%= form_tag transfers_path, id: "transfer-form" do %>
+      <%= form_tag transfers_path, id: "transfer-form" do %>
         <% label_tag :to %>
-      <div class="form-cellule mt-5">
-        <%= text_field_tag :to, nil, placeholder: "Address", class: "form-button-input" %>
+        <div class="form-cellule mt-5">
+          <%= text_field_tag :to, nil, placeholder: "Address", class: "form-button-input" %>
+        </div>
+        <div class="form-cellule mt-5">
+          <% label_tag :amount %>
+          <%= text_field_tag :amount, nil, placeholder: "Amont", class: "form-button-input" %>
+        </div>
+        <div>
+          <%= submit_tag "Send", class: "grey-button" %>
+        </div>
       </div>
-      <div class="form-cellule mt-5">
-        <% label_tag :amount %>
-        <%= text_field_tag :amount, nil, placeholder: "Amont", class: "form-button-input" %>
-      </div>
-      <div>
-        <%= submit_tag "Send", class: "grey-button" %>
-      </div>
-    </div>
     <% end %>
-
     <!-- Load Web3.js -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
-
     <script>
       window.addEventListener("load", async () => {
       // Connect to Ethereum network
@@ -43,7 +40,7 @@
         window.web3 = new Web3(web3.currentProvider);
       }
       // Non-dapp browsers...
-      else {
+          else {
         console.error("Non-Ethereum browser detected. You should consider trying MetaMask!");
       }
 
@@ -68,16 +65,16 @@
         </div>
         `;
 
-      document.getElementById("text-to-copy").addEventListener("click", function() {
-      const textToCopy = document.getElementById("text-to-copy");
-      const tempInput = document.createElement("input");
-      tempInput.value = textToCopy.innerText;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand("copy");
-      document.body.removeChild(tempInput);
-      alert("Texte copié : " + textToCopy.innerText);
+      document.getElementById("text-to-copy").addEventListener("click", async function() {
+        const textToCopy = document.getElementById("text-to-copy").innerText;
+          try {
+            await navigator.clipboard.writeText(textToCopy);
+            alert("Copied text: " + textToCopy);
+          } catch (err) {
+            console.error('Failed to copy text: ', err);
+          }
       });
+
 
       // Display balance account
       const balanceContainer = document.getElementById("balance");
@@ -93,24 +90,23 @@
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-      // Get form values
-      const to = form.elements.to.value;
-      const amount = form.elements.amount.value;
+        // Get form values
+        const to = form.elements.to.value;
+        const amount = form.elements.amount.value;
 
-      // Convert the amount to wei (the smallest unit of ether)
-      const amountInWei = web3.utils.toWei(amount, "ether");
+        // Convert the amount to wei (the smallest unit of ether)
+        const amountInWei = web3.utils.toWei(amount, "ether");
 
-      // Send the transaction
-      try {
-        const result = await web3.eth.sendTransaction({ from, to, value: amountInWei });
-        console.log(result);
+        // Send the transaction
+        try {
+          const result = await web3.eth.sendTransaction({ from, to, value: amountInWei });
+          console.log(result);
 
-        transactionsTable.appendChild(row);
-      } catch (error) {
-        console.error(error);
-      }
-    });
-    });
+          } catch (error) {
+          console.error(error);
+          }
+        });
+      });
     </script>
   </div>
 </div>

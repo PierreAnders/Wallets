@@ -2,6 +2,7 @@ class CryptosController < ApplicationController
   def new
     @crypto = Crypto.new
     @wallet = Wallet.find(params[:wallet_id])
+    @select_cryptos = CoinGeckoService.new.search_for_crypto.map { |coin| coin["name"] }.sort    
   end
 
   def create

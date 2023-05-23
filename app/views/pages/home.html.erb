@@ -7,7 +7,7 @@
       </div>
         <%= form_with url: root_path, method: :get do |form| %>
       <div class="m-2">
-        <%= form.select :query, Crypto::SELECT_CRYPTO, include_blank: "select crypto", class: "form-button-input" %>
+        <%= form.select :query, @select_cryptos, include_blank: "select crypto", class: "form-button-input" %>
       </div>
       <div class="d-flex justify-content-end m-2">
         <%= form.submit "Search", class: "grey-button" %>
@@ -245,7 +245,10 @@
     <div class="card-portfolio">
       <div class="card-portfolio-box">
         <div class="color-medium-grey">
-          <%= coin["market_cap_rank"] %> <%= "-" %><%= image_tag coin["image"], class: "logo-crypto" %></div>
+         <% if coin["market_cap_rank"] && coin["image"] %>
+            <%= coin["market_cap_rank"] %> <%= "-" %><%= image_tag coin["image"], class: "logo-crypto" %>
+          <% end %>
+        </div>
       </div>
       <div class="card-portfolio-box">
         <div><%= link_to coin["name"], "https://www.cryptos-wallets.com/?query=#{coin["name"]}&commit=Search", class: "crypto-link" %></div>
