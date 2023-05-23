@@ -49,4 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_134323) do
 
   add_foreign_key "cryptos", "wallets"
   add_foreign_key "wallets", "users"
+  
 end
