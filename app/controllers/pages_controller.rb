@@ -28,6 +28,7 @@ class PagesController < ApplicationController
 
       wallet.cryptos.sort_by(&:name).each do |crypto|
         @search_crypto = @search_cryptos.find { |search_crypto| search_crypto["name"] == crypto.name }
+        @crypto_current_price = @search_crypto["current_price"]
         @crypto_value = crypto.number.to_f * @crypto_current_price.to_f
         @crypto_change_24h = @search_crypto["price_change_percentage_24h"]
         @crypto_symbol = @search_crypto["symbol"]
