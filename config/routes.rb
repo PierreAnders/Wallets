@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "/portfolio", to: "pages#portfolio"
   get "/nft", to: "pages#nft"
+  get "/privacy", to: "pages#privacy"
 
   get "/transfers", to: "transfers#index"
   get "/transfers/new", to: "transfers#new"

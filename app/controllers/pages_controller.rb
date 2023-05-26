@@ -66,15 +66,6 @@ class PagesController < ApplicationController
     @wallets = Wallet.where(user: current_user)
   end
 
-  def fetch_coingecko_data
-    Rails.cache.fetch('coingecko_data', expires_in: 10.minutes) do
-      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=50&page=1'
-      uri = URI(url)
-      response = Net::HTTP.get(uri)
-      JSON.parse(response)
-    end
-  rescue => e
-    Rails.logger.error "Failed to fetch data from Coingecko: #{e.message}"
-    []
-  end  
+  def privacy
+  end
 end
